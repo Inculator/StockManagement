@@ -1,0 +1,49 @@
+.tab-pane .tab
+{
+    -fx-background-color: white ;
+}
+.tab-pane
+{
+    -fx-background-color: white ;
+}
+AnchorPane{
+       -fx-background-color:white;
+}
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+    -fx-background-color: white;
+}
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+}
+.tab-pane .tab:selected .tab-label
+{
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+.combo-box{
+    -fx-border-width: 0.5px;
+    -fx-border-color: black;
+    -fx-background-color: white;
+    -fx-border-radius: 20;
+    -fx-font-size: 12px; 
+    -fx-padding: 0px;
+    -fx-font-weight:700;
+    -fx-font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+.choice-box{
+    -fx-border-width: 0.5px;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    -fx-background-color: white;
+    -fx-padding: 0px;
+}
+.text-field{
+	-fx-border-color: black;
+}
+.label{
+	-fx-font-style: italic ;
+	-fx-font-size: 12px ;
+}

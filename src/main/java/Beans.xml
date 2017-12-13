@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="party" class="com.mg.csms.beans.Party" scope="prototype"></bean>
+	<bean id="partyContact" class="com.mg.csms.beans.PartyContact"
+		scope="prototype"></bean>
+	<bean id="inwardInventory" class="com.mg.csms.beans.InwardInventory"
+		scope="prototype"></bean>
+	<bean id="inwardStock" class="com.mg.csms.beans.InwardStock"
+		scope="prototype"></bean>
+	<bean id="outwardInventory" class="com.mg.csms.beans.OutwardInventory"
+		scope="prototype"></bean>
+	<bean id="stockWarehouse" class="com.mg.csms.beans.StockWarehouse"
+		scope="prototype"></bean>
+		
+</beans>

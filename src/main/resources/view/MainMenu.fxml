@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane blendMode="GREEN" stylesheets="@../style/MGMain.css" prefHeight="435.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoadTabFxmlActionController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <TabPane stylesheets="@../style/MGMain.css"  layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="900">
+      <tabs>
+        <Tab fx:id="stockEntryTab" closable="false" text="Stock Entry">
+          <content>
+            <fx:include id="inwardInventory" fx:id="stockEntry" source="StockEntry.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="stockinHandTab" closable="false" text="Stock In Hand">
+          <content>
+            <fx:include id="inwardInventoryList" fx:id="stockInHandList" source="StockInHand.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="demandTab" closable="false" text="Demand">
+          <content>
+            <fx:include id="stockTally" fx:id="demand" source="Demand.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="completedstocksTab" closable="false" text="Completed Stock">
+          <content>
+            <fx:include fx:id="completedstocksTabDetails" source="CompletedStocks.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="billingTab" closable="false" text="Billing">
+          <content>
+            <fx:include fx:id="billing" source="Billing.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="paidBillTab" closable="false" text="Paid Bills">
+          <content>
+            <fx:include fx:id="paidBill" source="PaidBill.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="coldVyaapariTab" closable="false" text="Cold/Vyaapari">
+          <content>
+            <fx:include id="customerDetails" fx:id="coldVyaapariDetails" source="ColdStorage.fxml" />
+          </content>
+        </Tab>
+        <Tab fx:id="addItemTab" closable="false" text="Add Item">
+          <content>
+            <fx:include fx:id="addItem" source="AddItem.fxml" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>

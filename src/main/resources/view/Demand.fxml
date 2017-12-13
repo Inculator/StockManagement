@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane layoutX="0.0" layoutY="0.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.DemandController">
+  <children>
+    <Label layoutX="95.0" layoutY="33.0" text="Date" />
+      <DatePicker fx:id="demandDate" layoutX="59.0" layoutY="55.0" prefHeight="25.0" prefWidth="136.0" />
+    <Label layoutX="205.0" layoutY="33.0" prefHeight="21.000091552734375" text="Cold No" />
+    <TextField fx:id="coldNo" layoutX="206.0" layoutY="55.0" prefWidth="87.0" />
+    <Label layoutX="308.0" layoutY="31.0" prefHeight="21.000091552734375" text="Quantity" />
+    <TextField fx:id="quantity" layoutX="305.0" layoutY="55.0" prefWidth="87.0" />
+    <Label layoutX="398.0" layoutY="31.0" prefHeight="21.000091552734375" text="Chalan Number" />
+    <TextField fx:id="chalanNumber" layoutX="396.0" layoutY="55.0" prefWidth="87.0" />
+    <Button fx:id="addDemandToListButton" layoutX="494.0" layoutY="55.0" mnemonicParsing="false" onAction="#addDemandToList" text="Add" />
+    <TableView fx:id="itemListTable" editable="true" layoutX="37.0" layoutY="98.0" prefHeight="200.0" prefWidth="515.0">
+      <columns>
+        <TableColumn fx:id="tableColdNo" maxWidth="5000.0" minWidth="10.0" prefWidth="178.0" text="Cold No" />
+        <TableColumn fx:id="tableQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="205.0" text="Quantity" />
+        <TableColumn fx:id="tableChalanNumber" maxWidth="5000.0" minWidth="10.0" prefWidth="129.0" text="Chalan Number" />
+      </columns>
+    </TableView>
+    <Button fx:id="submitDemandButton" layoutX="296.0" layoutY="316.0" mnemonicParsing="false" onAction="#submitDemand" text="SUBMIT" />
+    <Text fx:id="successMessage" fill="BLACK" layoutX="100.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+  </children>
+</AnchorPane>
