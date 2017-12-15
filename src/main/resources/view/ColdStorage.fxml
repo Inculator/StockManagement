@@ -11,25 +11,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="334.0000999999975" prefWidth="483.000009765625" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.ColdVyaapariController">
+<AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="500.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.ColdVyaapariController">
   <!-- TODO Add Nodes -->
   <children>
     <Pane layoutX="-2.0" layoutY="0.0" prefHeight="500.0" prefWidth="-1.0" />
-    <TabPane layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="519.0" tabClosingPolicy="ALL_TABS">
+    <TabPane layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="744.0" tabClosingPolicy="ALL_TABS">
       <tabs>
         <Tab fx:id="addColdStorage" closable="false" text="Add New Cold Storage">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Text fontSmoothingType="LCD" layoutX="17.0" layoutY="41.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" underline="false" />
-                <DatePicker fx:id="coldDate" layoutX="106.0" layoutY="23.0" prefHeight="25.0" prefWidth="200.0" />
-                <Text fontSmoothingType="LCD" layoutX="17.0" layoutY="71.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Cold Name" textAlignment="CENTER" underline="false" />
-                <TextField fx:id="coldName" layoutX="107.0" layoutY="55.0" prefHeight="25.0" prefWidth="199.0" />
-                <Text fontSmoothingType="LCD" layoutX="17.0" layoutY="102.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Cold Address" textAlignment="CENTER" underline="false" />
-                <TextField fx:id="coldAdd" layoutX="107.0" layoutY="86.0" prefHeight="25.0" prefWidth="199.0" promptText="Complete Address" />
-                <Text fontSmoothingType="LCD" layoutX="19.0" layoutY="132.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone No" textAlignment="CENTER" underline="false" />
-                <TextField fx:id="coldPhone" layoutX="107.0" layoutY="118.0" prefHeight="25.0" prefWidth="199.0" promptText="9999999999" />
-                <Button fx:id="addColdStoreButton" layoutX="124.0" layoutY="183.0" mnemonicParsing="false" onAction="#addColdStorage" prefHeight="40.0" prefWidth="164.0" text="Add Cold Storage" />
+                <Text fontSmoothingType="LCD" layoutX="133.0" layoutY="61.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" underline="false" />
+                <DatePicker fx:id="coldDate" layoutX="222.0" layoutY="43.0" prefHeight="25.0" prefWidth="200.0" />
+                <Text fontSmoothingType="LCD" layoutX="133.0" layoutY="91.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Cold Name" textAlignment="CENTER" underline="false" />
+                <TextField fx:id="coldName" layoutX="223.0" layoutY="75.0" prefHeight="25.0" prefWidth="199.0" />
+                <Text fontSmoothingType="LCD" layoutX="133.0" layoutY="122.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Cold Address" textAlignment="CENTER" underline="false" />
+                <TextField fx:id="coldAdd" layoutX="223.0" layoutY="106.0" prefHeight="25.0" prefWidth="199.0" promptText="Complete Address" />
+                <Text fontSmoothingType="LCD" layoutX="135.0" layoutY="152.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone No" textAlignment="CENTER" underline="false" />
+                <TextField fx:id="coldPhone" layoutX="223.0" layoutY="138.0" prefHeight="25.0" prefWidth="199.0" promptText="9999999999" />
+                <Button fx:id="addColdStoreButton" layoutX="240.0" layoutY="203.0" mnemonicParsing="false" onAction="#addColdStorage" prefHeight="40.0" prefWidth="164.0" text="Add Cold Storage" />
                 <Text fx:id="successMessage" layoutX="56.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
               </children>
             </AnchorPane>
@@ -39,15 +39,15 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Text fontSmoothingType="LCD" layoutX="22.0" layoutY="44.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" underline="false" />
-                <DatePicker fx:id="vyaapariDate" layoutX="120.0" layoutY="27.0" prefHeight="25.0" prefWidth="183.0" />
-                <Text fontSmoothingType="LCD" layoutX="22.0" layoutY="75.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyaapari Name" textAlignment="CENTER" underline="false" />
-                <TextField fx:id="vyaapariName" layoutX="121.0" layoutY="59.0" prefHeight="25.0" prefWidth="183.0" />
-                <Text fontSmoothingType="LCD" layoutX="22.0" layoutY="106.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyaapari Address" textAlignment="CENTER" underline="false" />
-                <TextField fx:id="vyaapariAddress" layoutX="121.0" layoutY="90.0" prefHeight="25.0" prefWidth="183.0" promptText="Complete Address" />
-                <Text fontSmoothingType="LCD" layoutX="24.0" layoutY="134.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone No" textAlignment="CENTER" underline="false" />
-                <TextField fx:id="vyaapariNumber" layoutX="120.0" layoutY="120.0" prefHeight="25.0" prefWidth="183.0" promptText="9999999999" />
-                <Button fx:id="addVyaapariButton" layoutX="136.0" layoutY="171.0" mnemonicParsing="false" onAction="#addVyaapari" prefHeight="41.0" prefWidth="142.0" text="Add Vyaapari" />
+                <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="70.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" underline="false" />
+                <DatePicker fx:id="vyaapariDate" layoutX="235.0" layoutY="53.0" prefHeight="25.0" prefWidth="183.0" />
+                <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="101.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyaapari Name" textAlignment="CENTER" underline="false" />
+                <TextField fx:id="vyaapariName" layoutX="236.0" layoutY="85.0" prefHeight="25.0" prefWidth="183.0" />
+                <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="132.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyaapari Address" textAlignment="CENTER" underline="false" />
+                <TextField fx:id="vyaapariAddress" layoutX="236.0" layoutY="116.0" prefHeight="25.0" prefWidth="183.0" promptText="Complete Address" />
+                <Text fontSmoothingType="LCD" layoutX="139.0" layoutY="160.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone No" textAlignment="CENTER" underline="false" />
+                <TextField fx:id="vyaapariNumber" layoutX="235.0" layoutY="146.0" prefHeight="25.0" prefWidth="183.0" promptText="9999999999" />
+                <Button fx:id="addVyaapariButton" layoutX="251.0" layoutY="197.0" mnemonicParsing="false" onAction="#addVyaapari" prefHeight="41.0" prefWidth="142.0" text="Add Vyaapari" />
                 <Text fx:id="successMessage1" layoutX="56.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
               </children>
             </AnchorPane>
@@ -57,7 +57,7 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TableView fx:id="coldListView" layoutX="14.0" layoutY="47.0" prefHeight="200.0" prefWidth="482.0">
+                <TableView fx:id="coldListView" layoutX="131.0" layoutY="49.0" prefHeight="200.0" prefWidth="482.0">
                   <columns>
                     <TableColumn fx:id="listColdName" maxWidth="5000.0" minWidth="10.0" prefWidth="139.0" text="Name" />
                     <TableColumn fx:id="listColdPhone" maxWidth="5000.0" minWidth="10.0" prefWidth="168.0" text="Phone Number" />
@@ -72,9 +72,9 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <AnchorPane id="Content" layoutX="0.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="276.0" prefWidth="457.0">
+                <AnchorPane id="Content" layoutX="0.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="276.0" prefWidth="744.0">
                   <children>
-                    <TableView fx:id="vyaapariListView" layoutX="14.0" layoutY="47.0" prefHeight="200.0" prefWidth="485.0">
+                    <TableView fx:id="vyaapariListView" layoutX="130.0" layoutY="50.0" prefHeight="200.0" prefWidth="485.0">
                       <columns>
                         <TableColumn fx:id="listVyaapariName" maxWidth="5000.0" minWidth="10.0" prefWidth="161.0" text="Name" />
                         <TableColumn fx:id="listVyaapariPhone" maxWidth="5000.0" minWidth="10.0" prefWidth="158.0" text="Phone Number" />

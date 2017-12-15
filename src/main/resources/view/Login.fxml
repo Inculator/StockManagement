@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,30 +13,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="686.0" prefWidth="1046.0" visible="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoginController">
+<AnchorPane prefHeight="621.0" prefWidth="960.0" visible="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoginController">
   <children>
-    <HBox alignment="CENTER" prefHeight="535.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <HBox alignment="CENTER" layoutX="2.0" layoutY="-3.0" prefHeight="622.0" prefWidth="960.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-3.0">
       <children>
-        <VBox alignment="CENTER" maxHeight="-1.0" maxWidth="-1.0" prefHeight="535.0" prefWidth="831.0">
+        <VBox alignment="CENTER" maxHeight="-1.0" maxWidth="-1.0" prefHeight="686.0" prefWidth="1052.0">
           <children>
-            <AnchorPane fx:id="apDesignPane" maxHeight="-1.0" maxWidth="-1.0">
+            <AnchorPane fx:id="apDesignPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="612.0" prefWidth="720.0">
               <children>
-                <Label layoutX="38.0" layoutY="14.0" prefHeight="56.0" prefWidth="559.0" text="Stock Management System" textFill="#569900">
+                <Label layoutX="174.0" layoutY="71.0" prefHeight="70.0" prefWidth="612.0" text="Stock Management System" textFill="#569900">
                   <font>
-                    <Font name="System Bold" size="31.0" />
+                    <Font name="Meiryo Bold Italic" size="42.0" />
                   </font>
                 </Label>
-                <AnchorPane focusTraversable="false" minHeight="258.0" prefHeight="258.0" prefWidth="349.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="381.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="112.0">
+                <AnchorPane focusTraversable="false" layoutX="161.0" layoutY="158.0" minHeight="258.0" prefHeight="258.0" prefWidth="521.0" style="-fx-background-color: #0072;" AnchorPane.bottomAnchor="196.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="158.0">
                   <children>
-                    <Label layoutX="121.0" layoutY="7.0" prefHeight="56.0" prefWidth="107.0" text="SIGN IN">
-                      <font>
-                        <Font size="29.0" />
-                      </font>
-                    </Label>
-                    <GridPane layoutX="35.0" layoutY="70.0" prefHeight="97.0" prefWidth="281.0" vgap="10.0">
+                    <GridPane layoutX="75.0" layoutY="28.0" prefHeight="168.0" prefWidth="342.0" vgap="10.0">
                       <children>
-                        <TextField fx:id="tfUserName" prefHeight="33.0" prefWidth="294.0" promptText="User Name" GridPane.columnSpan="2" />
-                        <PasswordField fx:id="pfUserPassword" prefHeight="33.0" prefWidth="294.0" promptText="Password" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="tfUserName" prefHeight="46.0" prefWidth="342.0" promptText="User Name" GridPane.columnSpan="2" />
+                        <PasswordField fx:id="pfUserPassword" prefHeight="44.0" prefWidth="342.0" promptText="Password" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,21 +42,16 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <Button fx:id="btnLogin" layoutX="108.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="39.0" prefWidth="134.0" text="Log In" />
-                    <Text fx:id="successMessage" fill="#e3dfee" fontSmoothingType="LCD" layoutX="10.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                    <Button fx:id="btnLogin" layoutX="175.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="35.0" prefWidth="143.0" text="Log In" />
+                    <Text fx:id="successMessage" fill="#e3dfee" fontSmoothingType="LCD" layoutX="14.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font></Text>
                   </children>
                 </AnchorPane>
-                <Text fill="#660000" layoutX="50.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thanks for choosing “Stock Management System” . " wrappingWidth="319.99999513477087">
-                  <font>
-                    <Font name="System Italic" size="16.0" />
-                  </font>
-                </Text>
-                        <Text fill="#660000" layoutX="14.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed By: MOHAK GUPTA OWNER- ATTI UTTAM" wrappingWidth="238.99999513477087">
+                        <Text fill="#660000" layoutX="442.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed By: MOHAK GUPTA " wrappingWidth="357.99999513477087">
                            <font>
-                              <Font name="System Italic" size="16.0" />
+                              <Font name="System Italic" size="26.0" />
                            </font>
                         </Text>
               </children>
