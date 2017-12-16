@@ -23,7 +23,7 @@ public class Main extends Application {
 			Stage stage = new Stage();
 			stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/logo.jpg")));
 			stage.setScene(scene);
-			stage.setTitle("Stock Management System");
+			stage.setTitle("Stock Management System : Mohak Gupta");
 			stage.showAndWait();
 			stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
