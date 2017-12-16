@@ -59,7 +59,6 @@ public class LoginController {
 				makePane(VIEW_MAIN_MENU_FXML);
 			else
 				successMessage.setText("Invalid Credentials !!!");
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

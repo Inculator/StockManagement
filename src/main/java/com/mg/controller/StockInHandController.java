@@ -1,6 +1,6 @@
 package com.mg.controller;
 
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +61,7 @@ public class StockInHandController {
 	@FXML
 	private TableColumn<InwardStockItem, String> itemGadiNo;
 	@FXML
-	private TableColumn<InwardStockItem, LocalDate> entryDate;
+	private TableColumn<InwardStockItem, String> entryDate;
 	@FXML
 	private TableColumn<InwardStockItem, String> itemExpectedRate;
 	@FXML
@@ -74,7 +74,7 @@ public class StockInHandController {
 	@FXML
 	private TableView<Demand> demandListTable;
 	@FXML
-	private TableColumn<Demand, LocalDate> demandTableDate;
+	private TableColumn<Demand, String> demandTableDate;
 	@FXML
 	private TableColumn<Demand, String> demandTableQuantity;
 	@FXML
@@ -147,7 +147,11 @@ public class StockInHandController {
 
 	private void initializeStockListTableView() {
 		stockListView.setEditable(true);
-		entryDate.setCellValueFactory(new PropertyValueFactory<InwardStockItem, LocalDate>("entryDate"));
+		entryDate.setCellValueFactory(new PropertyValueFactory<InwardStockItem, String>("entryDate"));
+		entryDate.setCellValueFactory(item -> {
+			return new SimpleStringProperty(
+					item.getValue().getEntryDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
+		});
 		itemColdNo.setCellValueFactory(new PropertyValueFactory<InwardStockItem, String>("coldNo"));
 		itemName.setCellValueFactory(new PropertyValueFactory<InwardStockItem, String>("item"));
 		itemQuantity.setCellValueFactory(new PropertyValueFactory<InwardStockItem, String>("quantity"));
@@ -178,7 +182,11 @@ public class StockInHandController {
 
 	private void initializeDemandListTableView() {
 		demandListTable.setEditable(true);
-		demandTableDate.setCellValueFactory(new PropertyValueFactory<Demand, LocalDate>("demandDate"));
+		demandTableDate.setCellValueFactory(new PropertyValueFactory<Demand, String>("demandDate"));
+		demandTableDate.setCellValueFactory(item -> {
+			return new SimpleStringProperty(
+					item.getValue().getDemandDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
+		});
 		demandTableQuantity.setCellValueFactory(new PropertyValueFactory<Demand, String>("quantity"));
 		demandTableChalanNumber.setCellValueFactory(new PropertyValueFactory<Demand, String>("chalanNumber"));
 	}

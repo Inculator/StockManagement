@@ -1,5 +1,7 @@
 package com.mg.csms;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -8,36 +10,38 @@ import com.mg.csms.beans.ColdStorage;
 public class TestMain {
 
 	public static void main(String[] args) {
-		/*ColdStorage coldObject = makeColdObject();
-		ColdStorage coldObject1 = makeColdObject1();
-		ObjectMapper mapper = new ObjectMapper();
-		File file = new File("D:\\cold.json");
-		if (!file.exists())
-			try {
-				file.createNewFile();
-			} catch (IOException e1) {
-			}
-
-		try {
-			Map<Integer, ColdStorage> coldMap = mapper.readValue(file, new TypeReference<Map<Integer, ColdStorage>>() {
-			});
-			coldMap.put(coldObject.getColdId(), coldObject);
-			coldMap.put(coldObject1.getColdId(), coldObject1);
-			mapper.writeValue(file, coldMap);
-
-			coldMap = mapper.readValue(file, new TypeReference<Map<Integer, ColdStorage>>() {
-			});
-
-			System.out.println(coldMap.size());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * ColdStorage coldObject = makeColdObject(); ColdStorage coldObject1 =
+		 * makeColdObject1(); ObjectMapper mapper = new ObjectMapper(); File
+		 * file = new File("D:\\cold.json"); if (!file.exists()) try {
+		 * file.createNewFile(); } catch (IOException e1) { }
+		 *
+		 * try { Map<Integer, ColdStorage> coldMap = mapper.readValue(file, new
+		 * TypeReference<Map<Integer, ColdStorage>>() { });
+		 * coldMap.put(coldObject.getColdId(), coldObject);
+		 * coldMap.put(coldObject1.getColdId(), coldObject1);
+		 * mapper.writeValue(file, coldMap);
+		 *
+		 * coldMap = mapper.readValue(file, new TypeReference<Map<Integer,
+		 * ColdStorage>>() { });
+		 *
+		 * System.out.println(coldMap.size()); } catch (IOException e) {
+		 * e.printStackTrace(); }
+		 */
 
 		LocalDate endofCentury = LocalDate.of(2018, 12, 01);
 		LocalDate now = LocalDate.now();
 
 		System.out.println(ChronoUnit.DAYS.between(now, endofCentury));
-		System.out.println((int)Math.ceil((double)ChronoUnit.DAYS.between(now, endofCentury)/30));
+		System.out.println((int) Math.ceil((double) ChronoUnit.DAYS.between(now, endofCentury) / 30));
+
+		try {
+			String directory = Paths.get(TestMain.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+					.toString().substring(0, 1);
+			System.out.println(directory);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 
 	}
 

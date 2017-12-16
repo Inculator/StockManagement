@@ -1,9 +1,18 @@
+.table-row-cell {
+    -fx-background-color: rgb(253,219,251);
+}
+.table-row-cell:selected {
+    -fx-background-color: linear-gradient(#95caff 0%, #77acff 90%, #e0e0e0 90%);
+}
 AnchorPane{
-       -fx-background-color:white;
+    -fx-background-color:white;
+    -fx-dark-text-color: navy;
+    -fx-mid-text-color: blue;
+    -fx-light-text-color: lightskyblue;
 }
 .tab-pane .tab .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: GREEN;
+    -fx-fill: #11d30b;
     -fx-font-size: 14px;
 }
 .tab-pane .tab:selected .tab-label
@@ -17,7 +26,7 @@ AnchorPane{
 }
 .combo-box{
     -fx-border-width: 0.5px;
-    -fx-border-color: black;
+    -fx-border-color: Orange;
     -fx-background-color: white;
     -fx-border-radius: 10;
     -fx-font-size: 12px; 
@@ -27,17 +36,24 @@ AnchorPane{
 }
 .choice-box{
     -fx-border-width: 0.5px;
-    -fx-border-color: black;
+    -fx-border-color: Orange;
     -fx-border-radius: 10;
     -fx-background-color: white;
     -fx-padding: 0px;
 }
 .text-field{
-	-fx-border-color: black;
+	-fx-border-color: ORANGE;
 }
 .label{
 	-fx-font-family: 'Verdana',Verdana;
 	-fx-font-style: italic ;
 	-fx-font-size: 12px ;
 	-fx-font-weight: bold;
+}
+.text{
+	-fx-font-family: 'Verdana',Verdana;
+	-fx-font-style: italic ;
+	-fx-font-size: 12px ;
+	-fx-font-weight: bold;
+	-fx-fill: Blue;
 }

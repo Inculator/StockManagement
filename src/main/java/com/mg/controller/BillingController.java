@@ -1,6 +1,6 @@
 package com.mg.controller;
 
-import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class BillingController {
 	@FXML
 	private TableColumn<BillingDetails, String> itemQuantity;
 	@FXML
-	private TableColumn<BillingDetails, Date> entryDate;
+	private TableColumn<BillingDetails, String> entryDate;
 	@FXML
 	private TableColumn<BillingDetails, String> itemLotNo;
 	@FXML
@@ -55,7 +55,7 @@ public class BillingController {
 	@FXML
 	private TableView<Demand> demandListTable;
 	@FXML
-	private TableColumn<Demand, Date> demandTableDate;
+	private TableColumn<Demand, String> demandTableDate;
 	@FXML
 	private TableColumn<Demand, String> demandTableQuantity;
 	@FXML
@@ -129,11 +129,17 @@ public class BillingController {
 
 	private void initializeBillingTableView() {
 		stockListView.setEditable(true);
-		entryDate.setCellValueFactory(new PropertyValueFactory<BillingDetails, Date>("entryDate"));
+		entryDate.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("entryDate"));
+		entryDate.setCellValueFactory(item -> {
+			return new SimpleStringProperty(
+					item.getValue().getEntryDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
+		});
 		itemColdNo.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("coldNo"));
 		itemQuantity.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("quantity"));
 		itemLotNo.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("lotNo"));
-		itemColdStore.setCellValueFactory((CellDataFeatures<BillingDetails, String> data) -> {return initializeColdStorageName(data);});
+		itemColdStore.setCellValueFactory((CellDataFeatures<BillingDetails, String> data) -> {
+			return initializeColdStorageName(data);
+		});
 		itemBhada.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("bhada"));
 		itemBillAmount.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("totalBillAmount"));
 	}
@@ -142,13 +148,12 @@ public class BillingController {
 		jsonStockModel.makeListAndMapFromJson();
 		Optional<InwardStock> stock = ((InwardStockJsonModel) jsonStockModel).getStockList().stream()
 				.filter(stockObject -> stockObject.getStockId() == data.getValue().getStockId()
-				|| stockObject.getStockId().equals(data.getValue().getStockId()))
+						|| stockObject.getStockId().equals(data.getValue().getStockId()))
 				.findAny();
-		Optional<ColdStorage> coldObject = getColdStoreList().stream()
-				.filter(cold -> stock.get().getColdId() == cold.getColdId()
-				|| stock.get().getColdId().equals(cold.getColdId()))
+		Optional<ColdStorage> coldObject = getColdStoreList().stream().filter(
+				cold -> stock.get().getColdId() == cold.getColdId() || stock.get().getColdId().equals(cold.getColdId()))
 				.findAny();
-		if(coldObject.isPresent())
+		if (coldObject.isPresent())
 			return new SimpleStringProperty(coldObject.get().getColdName());
 		return null;
 	}
@@ -160,7 +165,11 @@ public class BillingController {
 
 	private void initializeDemandListTableView() {
 		demandListTable.setEditable(true);
-		demandTableDate.setCellValueFactory(new PropertyValueFactory<Demand, Date>("demandDate"));
+		demandTableDate.setCellValueFactory(new PropertyValueFactory<Demand, String>("demandDate"));
+		demandTableDate.setCellValueFactory(item -> {
+			return new SimpleStringProperty(
+					item.getValue().getDemandDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
+		});
 		demandTableQuantity.setCellValueFactory(new PropertyValueFactory<Demand, String>("quantity"));
 		demandTableChalanNumber.setCellValueFactory(new PropertyValueFactory<Demand, String>("chalanNumber"));
 		demandBillAmount.setCellValueFactory(new PropertyValueFactory<Demand, String>("billAmount"));
@@ -188,7 +197,8 @@ public class BillingController {
 		Integer bhada = Integer.parseInt(coldBhada.getText());
 		ArrayList<Integer> billList = new ArrayList<>();
 		demandListToShow.stream().forEach(demand -> {
-			Integer months = (int)Math.ceil((double)ChronoUnit.DAYS.between(billObject.getEntryDate(), demand.getDemandDate())/30) + 1;
+			Integer months = (int) Math
+					.ceil((double) ChronoUnit.DAYS.between(billObject.getEntryDate(), demand.getDemandDate()) / 30) + 1;
 			Integer bill = demand.getQuantity() * bhada * months;
 			demand.setBillAmount(bill);
 			((DemandJsonModel) jsonDemandHandler).setDemandMap(demand);

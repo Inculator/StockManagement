@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="621.0" prefWidth="960.0" visible="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoginController">
+<AnchorPane prefHeight="621.0" prefWidth="960.0" visible="true" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoginController">
   <children>
     <HBox alignment="CENTER" layoutX="2.0" layoutY="-3.0" prefHeight="622.0" prefWidth="960.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-3.0">
       <children>
@@ -26,7 +26,7 @@
                     <Font name="Meiryo Bold Italic" size="42.0" />
                   </font>
                 </Label>
-                <AnchorPane focusTraversable="false" layoutX="161.0" layoutY="158.0" minHeight="258.0" prefHeight="258.0" prefWidth="521.0" style="-fx-background-color: #0072;" AnchorPane.bottomAnchor="196.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="158.0">
+                <AnchorPane focusTraversable="false" layoutX="161.0" layoutY="158.0" minHeight="258.0" prefHeight="308.0" prefWidth="554.0" style="-fx-background-color: #0072;" AnchorPane.bottomAnchor="146.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="158.0">
                   <children>
                     <GridPane layoutX="75.0" layoutY="28.0" prefHeight="168.0" prefWidth="342.0" vgap="10.0">
                       <children>
@@ -43,13 +43,13 @@
                       </rowConstraints>
                     </GridPane>
                     <Button fx:id="btnLogin" layoutX="175.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="35.0" prefWidth="143.0" text="Log In" />
-                    <Text fx:id="successMessage" fill="#e3dfee" fontSmoothingType="LCD" layoutX="14.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                    <Text fx:id="successMessage" fill="#4208e1" fontSmoothingType="LCD" layoutX="14.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font></Text>
                   </children>
                 </AnchorPane>
-                        <Text fill="#660000" layoutX="442.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed By: MOHAK GUPTA " wrappingWidth="357.99999513477087">
+                        <Text fill="#660000" layoutX="301.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed By: MOHAK GUPTA " wrappingWidth="357.99999513477087">
                            <font>
                               <Font name="System Italic" size="26.0" />
                            </font>

@@ -2,6 +2,7 @@ package com.mg.jsonhandler;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,7 +37,8 @@ public class JSONWriter {
 	}
 
 	private File createFileIfNotExist(String fileName) {
-		File file = new File(StockConstants.DIRECTORY_PATH + fileName + StockConstants.JSON_SUFFIX);
+		File file = new File(
+				getRunningDirectoryPath() + StockConstants.DIRECTORY_PATH + fileName + StockConstants.JSON_SUFFIX);
 		try {
 			if (!file.exists())
 				file.createNewFile();
@@ -47,7 +49,7 @@ public class JSONWriter {
 	}
 
 	private void createDirectory(String fileName) {
-		Path path = Paths.get(StockConstants.DIRECTORY_PATH);
+		Path path = Paths.get(getRunningDirectoryPath() + StockConstants.DIRECTORY_PATH);
 		if (!Files.exists(path)) {
 			try {
 				Files.createDirectories(path);
@@ -55,5 +57,16 @@ public class JSONWriter {
 				log.error("Error Creating Directory : " + fileName + ": " + e);
 			}
 		}
+	}
+
+	private String getRunningDirectoryPath() {
+		String directoryPath = "C";
+		try {
+			directoryPath = Paths.get(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+					.toString().substring(0, 1);
+		} catch (URISyntaxException e) {
+			log.error("Unable to get the working Directory");
+		}
+		return directoryPath;
 	}
 }

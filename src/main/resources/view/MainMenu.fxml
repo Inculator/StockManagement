@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane blendMode="GREEN" prefHeight="435.0" prefWidth="700.0" stylesheets="@../style/MGMain.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoadTabFxmlActionController">
+<AnchorPane blendMode="DARKEN" prefHeight="621.0" prefWidth="960.0" stylesheets="@../style/MGMain.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoadTabFxmlActionController">
   <!-- TODO Add Nodes -->
   <children>
-    <TabPane layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" rotateGraphic="true" stylesheets="@../style/MGMain.css">
+    <TabPane layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="960.0" rotateGraphic="true" stylesheets="@../style/MGMain.css">
       <tabs>
         <Tab fx:id="stockEntryTab" closable="false" text="Stock Entry">
           <content>
@@ -52,4 +53,7 @@
       </tabs>
     </TabPane>
   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </AnchorPane>

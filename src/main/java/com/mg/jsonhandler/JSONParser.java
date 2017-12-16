@@ -2,6 +2,8 @@ package com.mg.jsonhandler;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,53 +25,60 @@ import com.mg.stock.constant.StockConstants;
  *
  */
 public class JSONParser {
-
-	private static Logger log = Logger.getLogger(JSONWriter.class);
+	private static Logger log = Logger.getLogger(JSONParser.class);
 
 	public Map<Integer, Object> getObjectFromJsonFile(String fileName) throws IOException {
-		Map<Integer, Object> objectMap = new HashMap<>();
 		ObjectMapper mapper = new ObjectMapper();
-		File file = new File(StockConstants.DIRECTORY_PATH + fileName + StockConstants.JSON_SUFFIX);
+		TypeReference<?> referenceObject = null;
+
+		File file = new File(
+				getRunningDirectoryPath() + StockConstants.DIRECTORY_PATH + fileName + StockConstants.JSON_SUFFIX);
+		if (file.exists())
+			switch (fileName) {
+			case "ColdStorage":
+				referenceObject = new TypeReference<Map<Integer, ColdStorage>>() {
+				};
+				break;
+			case "Vyaapari":
+				referenceObject = new TypeReference<Map<Integer, Vyaapari>>() {
+				};
+				break;
+			case "InwardStock":
+				referenceObject = new TypeReference<Map<Integer, InwardStock>>() {
+				};
+				break;
+			case "InwardStockItem":
+				referenceObject = new TypeReference<Map<Integer, InwardStockItem>>() {
+				};
+				break;
+			case "Demand":
+				referenceObject = new TypeReference<Map<Integer, Demand>>() {
+				};
+				break;
+			case "ItemList":
+				referenceObject = new TypeReference<Map<Integer, Item>>() {
+				};
+				break;
+			case "Billing":
+				referenceObject = new TypeReference<Map<Integer, BillingDetails>>() {
+				};
+				break;
+			default:
+				break;
+			}
+		else
+			return new HashMap<Integer, Object>();
+		return mapper.readValue(file, referenceObject);
+	}
+
+	private String getRunningDirectoryPath() {
+		String directoryPath = "C";
 		try {
-			if (file.exists())
-				switch (fileName) {
-				case "ColdStorage":
-					objectMap = mapper.readValue(file, new TypeReference<Map<Integer, ColdStorage>>() {
-					});
-					break;
-				case "Vyaapari":
-					objectMap = mapper.readValue(file, new TypeReference<Map<Integer, Vyaapari>>() {
-					});
-					break;
-				case "InwardStock":
-					objectMap = mapper.readValue(file, new TypeReference<Map<Integer, InwardStock>>() {
-					});
-					break;
-				case "InwardStockItem":
-					objectMap = mapper.readValue(file, new TypeReference<Map<Integer, InwardStockItem>>() {
-					});
-					break;
-				case "Demand":
-					objectMap = mapper.readValue(file, new TypeReference<Map<Integer, Demand>>() {
-					});
-					break;
-				case "ItemList":
-					objectMap = mapper.readValue(file, new TypeReference<Map<Integer, Item>>() {
-					});
-					break;
-				case "Billing":
-					objectMap = mapper.readValue(file, new TypeReference<Map<Integer, BillingDetails>>() {
-					});
-					break;
-				default:
-					break;
-				}
-			else
-				return objectMap;
-		} catch (IOException e) {
-			log.error(e.getMessage());
-			throw new IOException("File " + fileName + " Does Not Exists ! ");
+			directoryPath = Paths.get(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+					.toString().substring(0, 1);
+		} catch (URISyntaxException e) {
+			log.error("Unable to get the working Directory");
 		}
-		return objectMap;
+		return directoryPath;
 	}
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="876.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.BillingController">
+<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="876.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.BillingController">
   <children>
     <AnchorPane layoutX="10.0" layoutY="8.0" minHeight="500.0" minWidth="500.0" prefHeight="549.0" prefWidth="876.0">
       <children>
@@ -19,7 +20,7 @@
             <TableColumn fx:id="itemQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Quantity" />
             <TableColumn fx:id="itemBhada" maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Rate/Bag/Month" />
             <TableColumn fx:id="itemColdStore" maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Cold Store" />
-            <TableColumn fx:id="itemBillAmount" maxWidth="5000.0" minWidth="10.0" text="Bill Amount" />
+            <TableColumn fx:id="itemBillAmount" maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Bill Amount" />
           </columns>
         </TableView>
         <TableView id="" fx:id="demandListTable" disable="false" editable="false" layoutX="107.0" layoutY="284.0" prefHeight="196.0" prefWidth="690.0">
@@ -30,7 +31,7 @@
         <TableColumn fx:id="demandBillAmount" maxWidth="5000.0" minWidth="10.0" prefWidth="195.0" text="Bill Amount" />
       </columns>
     </TableView>
-            <Text layoutX="148.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rate/Bag/Month" />
+            <Label layoutX="118.0" layoutY="222.0" text="Rate/Bag/Month" />
             <TextField fx:id="coldBhada" layoutX="250.0" layoutY="218.0" />
             <Button fx:id="calculateBillButton" layoutX="416.0" layoutY="218.0" mnemonicParsing="false" onAction="#calculateBill" prefHeight="25.0" prefWidth="128.0" text="Calculate Bill" />
             <Button fx:id="isBillPaid" layoutX="572.0" layoutY="218.0" mnemonicParsing="false" onAction="#billPaidAction" prefHeight="25.0" prefWidth="128.0" text="Paid ?" />
