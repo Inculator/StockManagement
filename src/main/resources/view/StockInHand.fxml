@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="876.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.StockInHandController">
+<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="908.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.StockInHandController">
   <!-- TODO Add Nodes -->
   <children>
     <Label layoutX="74.0" layoutY="19.0" prefHeight="25.0" prefWidth="61.0" text="Vyaapari" />
@@ -22,17 +22,17 @@
         <FXCollections fx:factory="observableArrayList" />
       </items>
     </ChoiceBox>
-    <TableView fx:id="stockListView" layoutX="24.0" layoutY="79.0" prefHeight="196.0" prefWidth="814.0">
+    <TableView fx:id="stockListView" layoutX="24.0" layoutY="79.0" prefHeight="196.0" prefWidth="872.0">
       <columns>
-        <TableColumn fx:id="itemGadiNo" maxWidth="5000.0" minWidth="10.0" prefWidth="61.0" text="Gadi No" />
-        <TableColumn fx:id="entryDate" maxWidth="5000.0" minWidth="10.0" text="Date" />
-        <TableColumn fx:id="itemColdNo" maxWidth="5000.0" minWidth="10.0" prefWidth="95.0" text="Cold No." />
-        <TableColumn fx:id="itemName" maxWidth="5000.0" minWidth="10.0" prefWidth="95.0" text="Item" />
-        <TableColumn fx:id="itemQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Quantity" />
-            <TableColumn fx:id="itemBalance" maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Balance" />
-        <TableColumn fx:id="itemExpectedRate" maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Expected Rate" />
-        <TableColumn fx:id="itemLotNo" maxWidth="5000.0" minWidth="10.0" prefWidth="86.0" text="Lot No" />
-        <TableColumn fx:id="itemColdStore" maxWidth="5000.0" minWidth="10.0" prefWidth="86.0" text="Cold Store" />
+        <TableColumn fx:id="itemGadiNo" maxWidth="5000.0" minWidth="10.0" prefWidth="73.0" text="Gadi No" />
+        <TableColumn fx:id="entryDate" maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Date" />
+        <TableColumn fx:id="itemColdNo" maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Cold No." />
+        <TableColumn fx:id="itemLotNo" maxWidth="5000.0" minWidth="10.0" prefWidth="82.0" text="Lot No" />
+        <TableColumn fx:id="itemName" maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Item" />
+        <TableColumn fx:id="itemQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="93.0" text="Quantity" />
+            <TableColumn fx:id="itemBalance" maxWidth="5000.0" minWidth="10.0" prefWidth="97.0" text="Balance" />
+        <TableColumn fx:id="itemColdStore" maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Cold Store" />
+        <TableColumn fx:id="itemExpectedRate" maxWidth="5000.0" minWidth="10.0" prefWidth="97.0" text="Expected Rate" />
       </columns>
     </TableView>
     <TableView id="" fx:id="demandListTable" disable="false" editable="false" layoutX="218.0" layoutY="290.0" prefHeight="196.0" prefWidth="441.0">

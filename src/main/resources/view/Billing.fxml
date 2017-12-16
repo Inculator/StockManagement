@@ -12,23 +12,23 @@
   <children>
     <AnchorPane layoutX="10.0" layoutY="8.0" minHeight="500.0" minWidth="500.0" prefHeight="549.0" prefWidth="876.0">
       <children>
-        <TableView fx:id="stockListView" layoutX="105.0" layoutY="14.0" prefHeight="196.0" prefWidth="690.0">
+        <TableView fx:id="stockListView" layoutX="105.0" layoutY="14.0" prefHeight="196.0" prefWidth="729.0">
           <columns>
             <TableColumn fx:id="entryDate" maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Date" />
-            <TableColumn fx:id="itemLotNo" maxWidth="5000.0" minWidth="10.0" prefWidth="76.0" text="Lot No" />
-            <TableColumn fx:id="itemColdNo" maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Cold No." />
-            <TableColumn fx:id="itemQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Quantity" />
-            <TableColumn fx:id="itemBhada" maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Rate/Bag/Month" />
-            <TableColumn fx:id="itemColdStore" maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Cold Store" />
-            <TableColumn fx:id="itemBillAmount" maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Bill Amount" />
+            <TableColumn fx:id="itemColdNo" maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Cold No." />
+            <TableColumn fx:id="itemLotNo" maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Lot No" />
+            <TableColumn fx:id="itemQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="79.0" text="Quantity" />
+            <TableColumn fx:id="itemBhada" maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Rate/Bag/Month" />
+            <TableColumn fx:id="itemColdStore" maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" text="Cold Store" />
+            <TableColumn fx:id="itemBillAmount" maxWidth="5000.0" minWidth="10.0" prefWidth="117.0" text="Bill Amount" />
           </columns>
         </TableView>
-        <TableView id="" fx:id="demandListTable" disable="false" editable="false" layoutX="107.0" layoutY="284.0" prefHeight="196.0" prefWidth="690.0">
+        <TableView id="" fx:id="demandListTable" disable="false" editable="false" layoutX="107.0" layoutY="284.0" prefHeight="196.0" prefWidth="729.0">
       <columns>
         <TableColumn fx:id="demandTableDate" maxWidth="5000.0" minWidth="10.0" prefWidth="171.0" text="Date" />
-        <TableColumn fx:id="demandTableQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="164.0" text="Quantity" />
-        <TableColumn fx:id="demandTableChalanNumber" maxWidth="5000.0" minWidth="10.0" prefWidth="157.0" text="Challan Number" />
-        <TableColumn fx:id="demandBillAmount" maxWidth="5000.0" minWidth="10.0" prefWidth="195.0" text="Bill Amount" />
+        <TableColumn fx:id="demandTableQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="185.0" text="Quantity" />
+        <TableColumn fx:id="demandBillAmount" maxWidth="5000.0" minWidth="10.0" prefWidth="202.0" text="Bill Amount" />
+        <TableColumn fx:id="demandTableChalanNumber" maxWidth="5000.0" minWidth="10.0" prefWidth="170.0" text="Challan Number" />
       </columns>
     </TableView>
             <Label layoutX="118.0" layoutY="222.0" text="Rate/Bag/Month" />
