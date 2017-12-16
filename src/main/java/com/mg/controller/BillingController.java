@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 
 /**
@@ -84,6 +85,7 @@ public class BillingController {
 		initializeTableViews();
 		addTableRowAction();
 		populateBillingListView();
+		addButtonKeyAction();
 	}
 
 	private void initializeObjects() {
@@ -106,6 +108,19 @@ public class BillingController {
 		if (!billingItemList.isEmpty())
 			filterPaidElements();
 		stockListView.setItems(FXCollections.observableList(billingItemList));
+	}
+
+	private void addButtonKeyAction() {
+		if (calculateBillButton != null)
+			calculateBillButton.setOnKeyPressed(e -> {
+				if (e.getCode().equals(KeyCode.ENTER))
+					calculateBill();
+			});
+		if (isBillPaid != null)
+			isBillPaid.setOnKeyPressed(e -> {
+				if (e.getCode().equals(KeyCode.ENTER))
+					billPaidAction();
+			});
 	}
 
 	protected void filterPaidElements() {
