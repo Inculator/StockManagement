@@ -1,8 +1,21 @@
 package com.mg.controller;
 
-public class PaidBillController extends BillingController{
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
+public class PaidBillController extends BillingController {
+
+	@FXML
+	private Button clearAndBackup;
+
+	@Override
 	protected void filterPaidElements() {
 		billingItemList.removeIf(item -> !item.getIsPaid());
+	}
+
+	@FXML
+	public void clearRecordsAction() {
+		new DialogPopupController().designScreen(); // make dialog popup
+													// singleton
 	}
 }
