@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 
 import com.mg.jsonhandler.JSONParser;
 
@@ -27,80 +28,14 @@ import javafx.stage.Stage;
 
 public class DialogPopupController {
 
+	private static Logger log = Logger.getLogger(DialogPopupController.class);
+
+	private static DialogPopupController dialogPopupController;
 	private static final String PASSWORD = "password";
 	private static final String RESOURCES_LOGIN_PROPERTIES = "login.properties";
 	private TextField driveValue;
 	private PasswordField password;
-	private Label l5;
-
-	private void popupButtonAction(String key) {
-		try (InputStream resourceStream = Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream(RESOURCES_LOGIN_PROPERTIES)) {
-			Properties p = new Properties();
-			p.load(resourceStream);
-
-			if (password != null)
-				if (password.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
-					switch (key) {
-					case "Backup":
-						popupBackupAction();
-						break;
-					case "Both":
-						popupDeleteAndBackupAction();
-						break;
-					default:
-						break;
-					}
-				else
-					l5.setText("Please enter a password");
-			else
-				l5.setText("Please enter a password");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		password.setText("");
-		driveValue.setText("");
-	}
-
-	private void popupBackupAction() {
-		File sourcePath = new File(getRunningDirectoryPath() + ":\\AU\\");
-		File destinationPath = new File(driveValue.getText() + "\\ATTIUTTAM_" + LocalDate.now() + "\\AU\\");
-		if (sourcePath.exists())
-			try {
-				deleteDirectory(destinationPath);
-				FileUtils.copyDirectory(sourcePath, destinationPath);
-				l5.setText("BACKUP SUCCESSFUL");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		else
-			l5.setText("Source/Destination Paths missing...");
-	}
-
-	private void popupDeleteAndBackupAction() {
-		File sourcePath = new File(getRunningDirectoryPath() + ":\\AU\\");
-		File destinationPath = new File(driveValue.getText() + "\\ATTIUTTAM_" + LocalDate.now());
-		if (sourcePath.exists())
-			try {
-				deleteDirectory(destinationPath);
-				FileUtils.copyDirectory(sourcePath, destinationPath);
-				deleteDirectory(sourcePath);
-				l5.setText("BACKUP SUCCESSFUL. APPLICATION HAS BEEN RESET !");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
-
-	public static void deleteDirectory(File dir) {
-		if (dir.isDirectory()) {
-			File[] children = dir.listFiles();
-			for (int i = 0; i < children.length; i++) {
-				deleteDirectory(children[i]);
-			}
-		}
-		dir.delete();
-	}
+	private Label labelMessage;
 
 	public void designScreen() {
 		final Stage dialog = new Stage();
@@ -109,7 +44,7 @@ public class DialogPopupController {
 		dialog.setTitle("Popup for Delete/Backup");
 		Label l1 = new Label("Drive for Backup");
 		Label l3 = new Label("Password");
-		l5 = new Label("");
+		labelMessage = new Label("");
 
 		Button fileOpen = new Button("Open Backup Path");
 		driveValue = new TextField();
@@ -129,7 +64,7 @@ public class DialogPopupController {
 		hb2.setAlignment(Pos.CENTER);
 
 		HBox hb4 = new HBox();
-		hb4.getChildren().addAll(l5);
+		hb4.getChildren().addAll(labelMessage);
 		hb4.setAlignment(Pos.CENTER);
 
 		HBox buttons = new HBox(2);
@@ -157,6 +92,75 @@ public class DialogPopupController {
 		dialog.show();
 	}
 
+	private void popupButtonAction(String key) {
+		try (InputStream resourceStream = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream(RESOURCES_LOGIN_PROPERTIES)) {
+			Properties p = new Properties();
+			p.load(resourceStream);
+
+			if (password != null)
+				if (password.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
+					switch (key) {
+					case "Backup":
+						popupBackupAction();
+						break;
+					case "Both":
+						popupDeleteAndBackupAction();
+						break;
+					default:
+						break;
+					}
+				else
+					labelMessage.setText("Please enter a password");
+			else
+				labelMessage.setText("Please enter a password");
+		} catch (IOException e) {
+			log.error("Error taking backup. Please contact administrator for details.");
+		}
+
+		password.setText("");
+		driveValue.setText("");
+	}
+
+	private void popupBackupAction() {
+		File sourcePath = new File(getRunningDirectoryPath() + ":\\AU\\");
+		File destinationPath = new File(driveValue.getText() + "\\ATTIUTTAM_" + LocalDate.now() + "\\AU\\");
+		if (sourcePath.exists())
+			try {
+				deleteDirectory(destinationPath);
+				FileUtils.copyDirectory(sourcePath, destinationPath);
+				labelMessage.setText("BACKUP SUCCESSFUL");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		else
+			labelMessage.setText("Source/Destination Paths missing...");
+	}
+
+	private void popupDeleteAndBackupAction() {
+		File sourcePath = new File(getRunningDirectoryPath() + ":\\AU\\");
+		File destinationPath = new File(driveValue.getText() + "\\ATTIUTTAM_" + LocalDate.now());
+		if (sourcePath.exists())
+			try {
+				deleteDirectory(destinationPath);
+				FileUtils.copyDirectory(sourcePath, destinationPath);
+				deleteDirectory(sourcePath);
+				labelMessage.setText("BACKUP SUCCESSFUL. APPLICATION HAS BEEN RESET !");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+
+	public static void deleteDirectory(File dir) {
+		if (dir.isDirectory()) {
+			File[] children = dir.listFiles();
+			for (int i = 0; i < children.length; i++) {
+				deleteDirectory(children[i]);
+			}
+		}
+		dir.delete();
+	}
+
 	private String getRunningDirectoryPath() {
 		String directoryPath = "C";
 		try {
@@ -165,6 +169,12 @@ public class DialogPopupController {
 		} catch (URISyntaxException e) {
 		}
 		return directoryPath;
+	}
+
+	public static DialogPopupController getInstance() {
+		if (dialogPopupController == null)
+			dialogPopupController = new DialogPopupController();
+		return dialogPopupController;
 	}
 
 }

@@ -15,7 +15,6 @@ public class PaidBillController extends BillingController {
 
 	@FXML
 	public void clearRecordsAction() {
-		new DialogPopupController().designScreen(); // make dialog popup
-													// singleton
+		DialogPopupController.getInstance().designScreen();
 	}
 }
