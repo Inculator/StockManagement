@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.InwardStock;
 import com.mg.json.controller.JsonHandlerInterface;
+import com.mg.json.controller.JsonReferenceInterface;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class InwardStockJsonModel implements JsonHandlerInterface {
+public class InwardStockJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
 	private List<InwardStock> stockList;
 	private Map<Integer, Object> stockMap;
@@ -17,7 +19,7 @@ public class InwardStockJsonModel implements JsonHandlerInterface {
 	@Override
 	public void makeListAndMapFromJson() {
 		stockMap = new HashMap<>();
-		stockMap = getObjectFromJsonFile("InwardStock");
+		stockMap = getObjectFromJsonFile(InwardStock.class.getSimpleName());
 		stockList = new ArrayList(stockMap.values());
 	}
 
@@ -31,5 +33,11 @@ public class InwardStockJsonModel implements JsonHandlerInterface {
 
 	public void setStockMap(InwardStock stock) {
 		this.stockMap.put(stock.getStockId(), stock);
+	}
+
+	@Override
+	public TypeReference<?> getTypeReference() {
+		return  new TypeReference<Map<Integer, InwardStock>>() {
+		};
 	}
 }

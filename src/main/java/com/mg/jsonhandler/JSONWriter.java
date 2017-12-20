@@ -22,7 +22,7 @@ public class JSONWriter {
 	private static Logger log = Logger.getLogger(JSONWriter.class);
 
 	public void writeObjectToJson(String fileName, Map<Integer, Object> jsonObject) {
-		createDirectory(fileName);
+		createDirectory();
 		File file = createFileIfNotExist(fileName);
 		writeObjectToFile(jsonObject, file);
 	}
@@ -48,13 +48,13 @@ public class JSONWriter {
 		return file;
 	}
 
-	private void createDirectory(String fileName) {
+	private void createDirectory() {
 		Path path = Paths.get(getRunningDirectoryPath() + StockConstants.DIRECTORY_PATH);
 		if (!Files.exists(path)) {
 			try {
 				Files.createDirectories(path);
 			} catch (IOException e) {
-				log.error("Error Creating Directory : " + fileName + ": " + e);
+				log.error("Error Creating Directory : " + e);
 			}
 		}
 	}

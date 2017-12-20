@@ -7,12 +7,14 @@ import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
+import com.mg.csms.beans.BillingDetails;
 import com.mg.csms.beans.Demand;
 import com.mg.csms.beans.InwardStockItem;
 import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.model.BillingJsonModel;
 import com.mg.json.model.DemandJsonModel;
 import com.mg.json.model.InwardStockItemJsonModel;
+import com.mg.stock.constant.StockConstants;
 import com.mg.utils.DateUtils;
 
 import javafx.collections.FXCollections;
@@ -100,7 +102,7 @@ public class DemandController {
 		try {
 			itemListTable.setItems(getDemandItem());
 		}catch(Exception e){
-			successMessage.setText("Make sure you have entererd all fields correctly !");
+			successMessage.setText(StockConstants.VALUE_ERROR_MESSAGE);
 		}
 	}
 
@@ -131,10 +133,10 @@ public class DemandController {
 			successMessage.setText("");
 			makeDemandItemsAndSave();
 			if(itemListTable.getItems().isEmpty())
-				successMessage.setText("Make sure you have added an Entry !");
+				successMessage.setText(StockConstants.VALUE_ERROR_MESSAGE);
 		} catch (Exception e) {
 			log.debug(e);
-			successMessage.setText("Some Error Occured !!! Make sure you have entererd all fields correctly !");
+			successMessage.setText(StockConstants.VALUE_ERROR_MESSAGE);
 		}
 		if ("".equalsIgnoreCase(successMessage.getText()))
 			successMessage.setText("Demand added successfully.");
@@ -167,7 +169,7 @@ public class DemandController {
 			maxKey = Collections.max(((DemandJsonModel) jsonDemandModel).getDemandMap().keySet());
 		demand.setDemandId(maxKey + 1);
 		((DemandJsonModel) jsonDemandModel).setDemandMap(demand);
-		jsonDemandModel.writeObjectToJson("Demand", ((DemandJsonModel) jsonDemandModel).getDemandMap());
+		jsonDemandModel.writeObjectToJson(Demand.class.getSimpleName(), ((DemandJsonModel) jsonDemandModel).getDemandMap());
 	}
 
 	private boolean updateStockItemListBalance(Demand demandItem) {
@@ -181,15 +183,6 @@ public class DemandController {
 		else
 			flag = ifItemNotPresent();
 		return flag;
-	}
-
-	private boolean ifItemNotPresent() {
-		if ("".equalsIgnoreCase(successMessage.getText()))
-			errorMessage.append("Cold No Does not exist. Please enter correct Cold No to place Demand.");
-		else
-			errorMessage.append(successMessage.getText() + MESSAGE_SEPERATOR
-					+ "Cold No Does not exist. Please enter correct Cold No to place Demand.");
-		return false;
 	}
 
 	private boolean ifItemPresent(Demand demandItem, Optional<InwardStockItem> item) {
@@ -213,7 +206,7 @@ public class DemandController {
 				item.get().setBalance(balance);
 				jsonStockItemModel.makeListAndMapFromJson();
 				((InwardStockItemJsonModel) jsonStockItemModel).setStockItemMap(item.get());
-				jsonStockItemModel.writeObjectToJson("InwardStockItem",
+				jsonStockItemModel.writeObjectToJson(InwardStockItem.class.getSimpleName(),
 						((InwardStockItemJsonModel) jsonStockItemModel).getStockItemMap());
 				if (balance == 0)
 					makeEntryInBillingFile(item.get());
@@ -224,11 +217,20 @@ public class DemandController {
 		return false;
 	}
 
+	private boolean ifItemNotPresent() {
+		if ("".equalsIgnoreCase(successMessage.getText()))
+			errorMessage.append("Cold No Does not exist. Please enter correct Cold No to place Demand.");
+		else
+			errorMessage.append(successMessage.getText() + MESSAGE_SEPERATOR
+					+ "Cold No Does not exist. Please enter correct Cold No to place Demand.");
+		return false;
+	}
+
 	private void makeEntryInBillingFile(InwardStockItem inwardStockItem) {
 		jsonBillingModel.makeListAndMapFromJson();
 		((BillingJsonModel) jsonBillingModel).setBillingMap(((BillingJsonModel) jsonBillingModel)
 				.makeBillingDetailsObjectFromInwardStockItemObject(inwardStockItem));
-		jsonBillingModel.writeObjectToJson("Billing", ((BillingJsonModel) jsonBillingModel).getBillingMap());
+		jsonBillingModel.writeObjectToJson(BillingDetails.class.getSimpleName(), ((BillingJsonModel) jsonBillingModel).getBillingMap());
 	}
 
 	private boolean isValidColdNo(Integer coldNo) {

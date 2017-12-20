@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.Item;
 import com.mg.json.controller.JsonHandlerInterface;
+import com.mg.json.controller.JsonReferenceInterface;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ItemJsonModel implements JsonHandlerInterface {
+public class ItemJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
 	private List<Item> itemList;
 	private Map<Integer, Object> itemMap;
@@ -17,7 +19,7 @@ public class ItemJsonModel implements JsonHandlerInterface {
 	@Override
 	public void makeListAndMapFromJson() {
 		itemMap = new HashMap<>();
-		itemMap = getObjectFromJsonFile("ItemList");
+		itemMap = getObjectFromJsonFile(Item.class.getSimpleName());
 		itemList = new ArrayList(itemMap.values());
 	}
 
@@ -33,6 +35,10 @@ public class ItemJsonModel implements JsonHandlerInterface {
 		return itemList;
 	}
 
-
+	@Override
+	public TypeReference<?> getTypeReference() {
+		return  new TypeReference<Map<Integer, Item>>() {
+		};
+	}
 
 }

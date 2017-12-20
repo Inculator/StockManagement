@@ -3,15 +3,12 @@ package com.mg.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
-import com.mg.jsonhandler.JSONParser;
+import com.mg.dialog.controller.factory.DialogHandlerFactory;
+import com.mg.weld.WeldManager;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,10 +25,11 @@ import javafx.stage.Stage;
 
 public class DialogPopupController {
 
+	private static final String ERROR_ADMIN = "Error taking backup. Please contact administrator for details.";
+
 	private static Logger log = Logger.getLogger(DialogPopupController.class);
 
 	private static DialogPopupController dialogPopupController;
-	private static final String PASSWORD = "password";
 	private static final String RESOURCES_LOGIN_PROPERTIES = "login.properties";
 	private TextField driveValue;
 	private PasswordField password;
@@ -50,7 +48,7 @@ public class DialogPopupController {
 		driveValue = new TextField();
 		password = new PasswordField();
 		Button popupBackup = new Button("BACKUP");
-		Button popupDeleteAndBackup = new Button("BACKUP & DELETE");
+		Button popupDeleteAndBackup = new Button("BACKUP & RESET");
 
 		HBox hb = new HBox();
 		hb.getChildren().addAll(l1, driveValue, fileOpen);
@@ -98,77 +96,19 @@ public class DialogPopupController {
 			Properties p = new Properties();
 			p.load(resourceStream);
 
-			if (password != null)
-				if (password.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
-					switch (key) {
-					case "Backup":
-						popupBackupAction();
-						break;
-					case "Both":
-						popupDeleteAndBackupAction();
-						break;
-					default:
-						break;
-					}
+			if (password != null && driveValue != null){
+				if (password.getText().equalsIgnoreCase(p.getProperty("password")))
+					WeldManager.getInstance().find(DialogHandlerFactory.class, key).popupHanderAction(driveValue, labelMessage);
 				else
 					labelMessage.setText("Please enter a password");
+				password.setText("");
+				driveValue.setText("");
+			}
 			else
-				labelMessage.setText("Please enter a password");
+				labelMessage.setText("Please enter a password/ Drive value !");
 		} catch (IOException e) {
-			log.error("Error taking backup. Please contact administrator for details.");
+			log.error(ERROR_ADMIN);
 		}
-
-		password.setText("");
-		driveValue.setText("");
-	}
-
-	private void popupBackupAction() {
-		File sourcePath = new File(getRunningDirectoryPath() + ":\\AU\\");
-		File destinationPath = new File(driveValue.getText() + "\\ATTIUTTAM_" + LocalDate.now() + "\\AU\\");
-		if (sourcePath.exists())
-			try {
-				deleteDirectory(destinationPath);
-				FileUtils.copyDirectory(sourcePath, destinationPath);
-				labelMessage.setText("BACKUP SUCCESSFUL");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		else
-			labelMessage.setText("Source/Destination Paths missing...");
-	}
-
-	private void popupDeleteAndBackupAction() {
-		File sourcePath = new File(getRunningDirectoryPath() + ":\\AU\\");
-		File destinationPath = new File(driveValue.getText() + "\\ATTIUTTAM_" + LocalDate.now());
-		if (sourcePath.exists())
-			try {
-				deleteDirectory(destinationPath);
-				FileUtils.copyDirectory(sourcePath, destinationPath);
-				deleteDirectory(sourcePath);
-				labelMessage.setText("BACKUP SUCCESSFUL. APPLICATION HAS BEEN RESET !");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
-
-	public static void deleteDirectory(File dir) {
-		if (dir.isDirectory()) {
-			File[] children = dir.listFiles();
-			for (int i = 0; i < children.length; i++) {
-				deleteDirectory(children[i]);
-			}
-		}
-		dir.delete();
-	}
-
-	private String getRunningDirectoryPath() {
-		String directoryPath = "C";
-		try {
-			directoryPath = Paths.get(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI())
-					.toString().substring(0, 1);
-		} catch (URISyntaxException e) {
-		}
-		return directoryPath;
 	}
 
 	public static DialogPopupController getInstance() {

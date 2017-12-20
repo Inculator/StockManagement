@@ -36,6 +36,14 @@ import javafx.scene.text.Text;
  */
 public class BillingController {
 
+	private static final String SELECT_ENTRY_MESSAGE = "Please select an entry in the above List View !!!";
+	protected List<BillingDetails> billingItemList;
+	private List<Demand> demandListToShow;
+	private JsonHandlerInterface jsonStockModel;
+	private JsonHandlerInterface jsonColdHandler;
+	private JsonHandlerInterface jsonDemandHandler;
+	private JsonHandlerInterface jsonBillingModel;
+
 	@FXML
 	private TableView<BillingDetails> stockListView;
 	@FXML
@@ -52,7 +60,6 @@ public class BillingController {
 	private TableColumn<BillingDetails, String> itemBhada;
 	@FXML
 	private TableColumn<BillingDetails, String> itemBillAmount;
-
 	@FXML
 	private TableView<Demand> demandListTable;
 	@FXML
@@ -71,13 +78,6 @@ public class BillingController {
 	private TextField coldBhada;
 	@FXML
 	private Text successMessage;
-
-	private JsonHandlerInterface jsonStockModel;
-	private JsonHandlerInterface jsonColdHandler;
-	private JsonHandlerInterface jsonDemandHandler;
-	protected List<BillingDetails> billingItemList;
-	private List<Demand> demandListToShow;
-	private JsonHandlerInterface jsonBillingModel;
 
 	@FXML
 	public void initialize() {
@@ -100,6 +100,49 @@ public class BillingController {
 	private void initializeTableViews() {
 		initializeBillingTableView();
 		initializeDemandListTableView();
+	}
+
+	private void initializeBillingTableView() {
+		stockListView.setEditable(true);
+		entryDate.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("entryDate"));
+		entryDate.setCellValueFactory(item -> {
+			return new SimpleStringProperty(
+					item.getValue().getEntryDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
+		});
+		itemColdNo.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("coldNo"));
+		itemQuantity.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("quantity"));
+		itemLotNo.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("lotNo"));
+		itemColdStore.setCellValueFactory((CellDataFeatures<BillingDetails, String> data) -> {
+			return initializeColdStorageName(data);
+		});
+		itemBhada.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("bhada"));
+		itemBillAmount.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("totalBillAmount"));
+	}
+
+	private ObservableValue<String> initializeColdStorageName(CellDataFeatures<BillingDetails, String> data) {
+		jsonStockModel.makeListAndMapFromJson();
+		Optional<InwardStock> stock = ((InwardStockJsonModel) jsonStockModel).getStockList().stream()
+				.filter(stockObject -> stockObject.getStockId() == data.getValue().getStockId()
+						|| stockObject.getStockId().equals(data.getValue().getStockId()))
+				.findAny();
+		Optional<ColdStorage> coldObject = getColdStoreList().stream().filter(
+				cold -> stock.get().getColdId() == cold.getColdId() || stock.get().getColdId().equals(cold.getColdId()))
+				.findAny();
+		if (coldObject.isPresent())
+			return new SimpleStringProperty(coldObject.get().getColdName());
+		return null;
+	}
+
+	private void initializeDemandListTableView() {
+		demandListTable.setEditable(true);
+		demandTableDate.setCellValueFactory(new PropertyValueFactory<Demand, String>("demandDate"));
+		demandTableDate.setCellValueFactory(item -> {
+			return new SimpleStringProperty(
+					item.getValue().getDemandDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
+		});
+		demandTableQuantity.setCellValueFactory(new PropertyValueFactory<Demand, String>("quantity"));
+		demandTableChalanNumber.setCellValueFactory(new PropertyValueFactory<Demand, String>("chalanNumber"));
+		demandBillAmount.setCellValueFactory(new PropertyValueFactory<Demand, String>("billAmount"));
 	}
 
 	private void populateBillingListView() {
@@ -142,59 +185,16 @@ public class BillingController {
 		demandListTable.setItems(FXCollections.observableList(demandListToShow));
 	}
 
-	private void initializeBillingTableView() {
-		stockListView.setEditable(true);
-		entryDate.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("entryDate"));
-		entryDate.setCellValueFactory(item -> {
-			return new SimpleStringProperty(
-					item.getValue().getEntryDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
-		});
-		itemColdNo.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("coldNo"));
-		itemQuantity.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("quantity"));
-		itemLotNo.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("lotNo"));
-		itemColdStore.setCellValueFactory((CellDataFeatures<BillingDetails, String> data) -> {
-			return initializeColdStorageName(data);
-		});
-		itemBhada.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("bhada"));
-		itemBillAmount.setCellValueFactory(new PropertyValueFactory<BillingDetails, String>("totalBillAmount"));
-	}
-
-	private ObservableValue<String> initializeColdStorageName(CellDataFeatures<BillingDetails, String> data) {
-		jsonStockModel.makeListAndMapFromJson();
-		Optional<InwardStock> stock = ((InwardStockJsonModel) jsonStockModel).getStockList().stream()
-				.filter(stockObject -> stockObject.getStockId() == data.getValue().getStockId()
-						|| stockObject.getStockId().equals(data.getValue().getStockId()))
-				.findAny();
-		Optional<ColdStorage> coldObject = getColdStoreList().stream().filter(
-				cold -> stock.get().getColdId() == cold.getColdId() || stock.get().getColdId().equals(cold.getColdId()))
-				.findAny();
-		if (coldObject.isPresent())
-			return new SimpleStringProperty(coldObject.get().getColdName());
-		return null;
-	}
-
 	private List<ColdStorage> getColdStoreList() {
 		jsonColdHandler.makeListAndMapFromJson();
 		return ((ColdStorageJsonModel) jsonColdHandler).getColdStoreList();
-	}
-
-	private void initializeDemandListTableView() {
-		demandListTable.setEditable(true);
-		demandTableDate.setCellValueFactory(new PropertyValueFactory<Demand, String>("demandDate"));
-		demandTableDate.setCellValueFactory(item -> {
-			return new SimpleStringProperty(
-					item.getValue().getDemandDate().format(DateTimeFormatter.ofPattern("dd/MM/uuuu")));
-		});
-		demandTableQuantity.setCellValueFactory(new PropertyValueFactory<Demand, String>("quantity"));
-		demandTableChalanNumber.setCellValueFactory(new PropertyValueFactory<Demand, String>("chalanNumber"));
-		demandBillAmount.setCellValueFactory(new PropertyValueFactory<Demand, String>("billAmount"));
 	}
 
 	@FXML
 	private void calculateBill() {
 		BillingDetails billObject = stockListView.getSelectionModel().selectedItemProperty().get();
 		if (billObject == null)
-			successMessage.setText("Please select an entry to calculate bill in the above List View !!!");
+			successMessage.setText(SELECT_ENTRY_MESSAGE);
 		else {
 			calculateBillForEachDemand(billObject);
 			writeUpdatedObjectsToJson(billObject);
@@ -205,7 +205,7 @@ public class BillingController {
 
 	private void writeUpdatedObjectsToJson(BillingDetails billObject) {
 		updateBillingMapAndWriteToJson(billObject);
-		jsonDemandHandler.writeObjectToJson("Demand", ((DemandJsonModel) jsonDemandHandler).getDemandMap());
+		jsonDemandHandler.writeObjectToJson(Demand.class.getSimpleName(), ((DemandJsonModel) jsonDemandHandler).getDemandMap());
 	}
 
 	private void calculateBillForEachDemand(BillingDetails billObject) {
@@ -227,7 +227,7 @@ public class BillingController {
 	private void billPaidAction() {
 		final BillingDetails billObject = stockListView.getSelectionModel().selectedItemProperty().get();
 		if (billObject == null)
-			successMessage.setText("Please select an entry to mark it as Paid in the above List View !!!");
+			successMessage.setText(SELECT_ENTRY_MESSAGE);
 		else {
 			billObject.setIsPaid(true);
 			updateBillingMapAndWriteToJson(billObject);
@@ -238,7 +238,7 @@ public class BillingController {
 
 	private void updateBillingMapAndWriteToJson(final BillingDetails billObject) {
 		((BillingJsonModel) jsonBillingModel).setBillingMap(billObject);
-		jsonBillingModel.writeObjectToJson("Billing", ((BillingJsonModel) jsonBillingModel).getBillingMap());
+		jsonBillingModel.writeObjectToJson(BillingDetails.class.getSimpleName(), ((BillingJsonModel) jsonBillingModel).getBillingMap());
 	}
 
 	private void refreshScreen() {

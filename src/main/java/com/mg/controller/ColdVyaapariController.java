@@ -9,6 +9,7 @@ import com.mg.csms.beans.Vyaapari;
 import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.model.ColdStorageJsonModel;
 import com.mg.json.model.VyaapariJsonModel;
+import com.mg.stock.constant.StockConstants;
 import com.mg.utils.DateUtils;
 
 import javafx.collections.FXCollections;
@@ -167,7 +168,7 @@ public class ColdVyaapariController {
 			makeColdStoreList();
 			clearUI();
 		} catch (Exception e) {
-			successMessage.setText("Make sure you have entererd Name correctly !");
+			successMessage.setText(StockConstants.VALUE_ERROR_MESSAGE);
 		}
 	}
 
@@ -177,7 +178,7 @@ public class ColdVyaapariController {
 			maxKey = Collections.max(((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap().keySet());
 		cold.setColdId(maxKey + 1);
 		((ColdStorageJsonModel) jsonColdHandler).setColdStoreMap(cold);
-		jsonColdHandler.writeObjectToJson("ColdStorage", ((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap());
+		jsonColdHandler.writeObjectToJson(ColdStorage.class.getSimpleName(), ((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap());
 	}
 
 	private ColdStorage makeColdStorage(ColdStorage cold) {
@@ -202,7 +203,7 @@ public class ColdVyaapariController {
 			makeVyaapariList();
 			clearUI();
 		} catch (Exception e) {
-			successMessage1.setText("Make sure you have entererd Name correctly !");
+			successMessage1.setText(StockConstants.VALUE_ERROR_MESSAGE);
 		}
 	}
 
@@ -212,7 +213,7 @@ public class ColdVyaapariController {
 			maxKey = Collections.max(((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap().keySet());
 		vyaapari.setVyaapariId(maxKey + 1);
 		((VyaapariJsonModel) jsonVyaapariHandler).setVyaapariMap(vyaapari);
-		jsonVyaapariHandler.writeObjectToJson("Vyaapari", ((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap());
+		jsonVyaapariHandler.writeObjectToJson(Vyaapari.class.getSimpleName(), ((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap());
 	}
 
 	private Vyaapari makeVyaapari(Vyaapari vyaapari) {
@@ -239,14 +240,14 @@ public class ColdVyaapariController {
 	@FXML
 	protected void deleteColdStoreAction(){
 		((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap().remove(coldListView.getSelectionModel().getSelectedItem().getColdId());
-		jsonColdHandler.writeObjectToJson("ColdStorage", ((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap());
+		jsonColdHandler.writeObjectToJson(ColdStorage.class.getSimpleName(), ((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap());
 		makeColdStoreList();
 	}
 
 	@FXML
 	protected void deleteVyapariAction(){
 		((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap().remove(vyaapariListView.getSelectionModel().getSelectedItem().getVyaapariId());
-		jsonVyaapariHandler.writeObjectToJson("Vyaapari", ((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap());
+		jsonVyaapariHandler.writeObjectToJson(Vyaapari.class.getSimpleName(), ((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap());
 		makeVyaapariList();
 	}
 

@@ -18,7 +18,9 @@ import com.mg.csms.beans.InwardStock;
 import com.mg.csms.beans.InwardStockItem;
 import com.mg.csms.beans.Item;
 import com.mg.csms.beans.Vyaapari;
+import com.mg.json.controller.JsonReferenceInterface;
 import com.mg.stock.constant.StockConstants;
+import com.mg.weld.WeldManager;
 
 /**
  * @author Mohak Gupta
@@ -34,41 +36,48 @@ public class JSONParser {
 		File file = new File(
 				getRunningDirectoryPath() + StockConstants.DIRECTORY_PATH + fileName + StockConstants.JSON_SUFFIX);
 		if (file.exists())
-			switch (fileName) {
-			case "ColdStorage":
-				referenceObject = new TypeReference<Map<Integer, ColdStorage>>() {
-				};
-				break;
-			case "Vyaapari":
-				referenceObject = new TypeReference<Map<Integer, Vyaapari>>() {
-				};
-				break;
-			case "InwardStock":
-				referenceObject = new TypeReference<Map<Integer, InwardStock>>() {
-				};
-				break;
-			case "InwardStockItem":
-				referenceObject = new TypeReference<Map<Integer, InwardStockItem>>() {
-				};
-				break;
-			case "Demand":
-				referenceObject = new TypeReference<Map<Integer, Demand>>() {
-				};
-				break;
-			case "ItemList":
-				referenceObject = new TypeReference<Map<Integer, Item>>() {
-				};
-				break;
-			case "Billing":
-				referenceObject = new TypeReference<Map<Integer, BillingDetails>>() {
-				};
-				break;
-			default:
-				break;
-			}
+			referenceObject = WeldManager.getInstance().find(JsonReferenceInterface.class, fileName).getTypeReference();
 		else
 			return new HashMap<Integer, Object>();
 		return mapper.readValue(file, referenceObject);
+	}
+
+	private TypeReference<?> makeReferenceObject(String fileName, TypeReference<?> referenceObject) {
+
+		referenceObject = WeldManager.getInstance().find(JsonReferenceInterface.class, fileName).getTypeReference();
+		switch (fileName) {
+		case "ColdStorage":
+			referenceObject = new TypeReference<Map<Integer, ColdStorage>>() {
+			};
+			break;
+		case "Vyaapari":
+			referenceObject = new TypeReference<Map<Integer, Vyaapari>>() {
+			};
+			break;
+		case "InwardStock":
+			referenceObject = new TypeReference<Map<Integer, InwardStock>>() {
+			};
+			break;
+		case "InwardStockItem":
+			referenceObject = new TypeReference<Map<Integer, InwardStockItem>>() {
+			};
+			break;
+		case "Demand":
+			referenceObject = new TypeReference<Map<Integer, Demand>>() {
+			};
+			break;
+		case "Item":
+			referenceObject = new TypeReference<Map<Integer, Item>>() {
+			};
+			break;
+		case "BillingDetails":
+			referenceObject = new TypeReference<Map<Integer, BillingDetails>>() {
+			};
+			break;
+		default:
+			break;
+		}
+		return referenceObject;
 	}
 
 	private String getRunningDirectoryPath() {

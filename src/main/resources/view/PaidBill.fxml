@@ -28,7 +28,7 @@
         <TableColumn fx:id="demandBillAmount" maxWidth="5000.0" minWidth="10.0" prefWidth="195.0" text="Bill Amount" />
       </columns>
     </TableView>
-            <Button fx:id="clearAndBackup" layoutX="385.0" layoutY="465.0" mnemonicParsing="false" onAction="#clearRecordsAction" prefHeight="25.0" prefWidth="140.0" text="CLEAR / BACKUP" />
+            <Button fx:id="clearAndBackup" layoutX="385.0" layoutY="465.0" mnemonicParsing="false" onAction="#clearRecordsAction" prefHeight="25.0" prefWidth="140.0" text="BACKUP / RESET" />
       </children>
     </AnchorPane>
   </children>

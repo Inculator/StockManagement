@@ -42,8 +42,13 @@ public class StockInHandController {
 	private List<InwardStockItem> stockItemList1;
 	private List<InwardStockItem> stockListUpdated;
 	private List<Demand> demandListToShow;
-
+	private JsonHandlerInterface jsonStockModel;
+	private JsonHandlerInterface jsonStockItemModel;
+	private JsonHandlerInterface jsonColdHandler;
+	private JsonHandlerInterface jsonVyaapariHandler;
+	private JsonHandlerInterface jsonDemandHandler;
 	private Integer vyaapariIdFromChoiceBox;
+
 	protected Integer gadiNoFromChoiceBox = 0;
 
 	@FXML
@@ -70,7 +75,6 @@ public class StockInHandController {
 	private TableColumn<InwardStockItem, String> itemColdStore;
 	@FXML
 	private TableColumn<InwardStockItem, String> itemBalance;
-
 	@FXML
 	private TableView<Demand> demandListTable;
 	@FXML
@@ -80,11 +84,6 @@ public class StockInHandController {
 	@FXML
 	private TableColumn<Demand, String> demandTableChalanNumber;
 
-	private JsonHandlerInterface jsonStockModel;
-	private JsonHandlerInterface jsonStockItemModel;
-	private JsonHandlerInterface jsonColdHandler;
-	private JsonHandlerInterface jsonVyaapariHandler;
-	private JsonHandlerInterface jsonDemandHandler;
 
 	@FXML
 	protected void initialize() {
@@ -159,7 +158,10 @@ public class StockInHandController {
 		itemExpectedRate.setCellValueFactory(new PropertyValueFactory<InwardStockItem, String>("rate"));
 		itemLotNo.setCellValueFactory(new PropertyValueFactory<InwardStockItem, String>("lotNo"));
 		itemBalance.setCellValueFactory(new PropertyValueFactory<InwardStockItem, String>("balance"));
+		initializeColdStoreInTableView();
+	}
 
+	private void initializeColdStoreInTableView() {
 		itemColdStore.setCellValueFactory((CellDataFeatures<InwardStockItem, String> data) -> {
 			jsonStockModel.makeListAndMapFromJson();
 			Optional<InwardStock> stock = ((InwardStockJsonModel) jsonStockModel).getStockList().stream()

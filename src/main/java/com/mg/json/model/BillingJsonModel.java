@@ -5,16 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.BillingDetails;
 import com.mg.csms.beans.InwardStockItem;
 import com.mg.json.controller.JsonHandlerInterface;
+import com.mg.json.controller.JsonReferenceInterface;
 
 /**
  * @author Mohak Gupta
  *
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class BillingJsonModel implements JsonHandlerInterface {
+public class BillingJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
 	private List<BillingDetails> billingList;
 	private Map<Integer, Object> billingMap;
@@ -22,7 +24,7 @@ public class BillingJsonModel implements JsonHandlerInterface {
 	@Override
 	public void makeListAndMapFromJson() {
 		billingMap = new HashMap<>();
-		billingMap = getObjectFromJsonFile("Billing");
+		billingMap = getObjectFromJsonFile(BillingDetails.class.getSimpleName());
 		billingList = new ArrayList(billingMap.values());
 	}
 
@@ -51,5 +53,11 @@ public class BillingJsonModel implements JsonHandlerInterface {
 		bill.setGadiNo(inwardStockItem.getGadiNo());
 		bill.setBalance(inwardStockItem.getBalance());
 		return bill;
+	}
+
+	@Override
+	public TypeReference<?> getTypeReference() {
+		return  new TypeReference<Map<Integer, BillingDetails>>() {
+		};
 	}
 }

@@ -1,10 +1,8 @@
 package com.mg.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -15,8 +13,9 @@ import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.model.ColdStorageJsonModel;
 import com.mg.json.model.InwardStockItemJsonModel;
 import com.mg.json.model.InwardStockJsonModel;
+import com.mg.json.model.ItemJsonModel;
 import com.mg.json.model.VyaapariJsonModel;
-import com.mg.jsonhandler.JSONParser;
+import com.mg.stock.constant.StockConstants;
 import com.mg.utils.DateUtils;
 
 import javafx.collections.FXCollections;
@@ -47,7 +46,7 @@ public class InwardStockController {
 	@FXML
 	private ComboBox<String> vyaapariList;
 	@FXML
-	private ComboBox<String> itemList;
+	private ComboBox<Item> itemList;
 	@FXML
 	private TextField totalQuantity;
 	@FXML
@@ -88,6 +87,7 @@ public class InwardStockController {
 	private JsonHandlerInterface jsonStockItemModel;
 	private JsonHandlerInterface jsonColdHandler;
 	private JsonHandlerInterface jsonVyaapariHandler;
+	private JsonHandlerInterface jsonItemModel;
 
 	@FXML
 	protected void initialize() {
@@ -96,6 +96,7 @@ public class InwardStockController {
 			jsonStockItemModel = new InwardStockItemJsonModel();
 			jsonColdHandler = new ColdStorageJsonModel();
 			jsonVyaapariHandler = new VyaapariJsonModel();
+			jsonItemModel = new ItemJsonModel();
 		} catch (Exception e) {
 			successMessage.setText("Database errors occoured");
 		}
@@ -138,7 +139,7 @@ public class InwardStockController {
 		try {
 			itemListTable.setItems(getInwardStockItem());
 		} catch (Exception e) {
-			successMessage.setText("Make sure you have entererd all fields correctly !");
+			successMessage.setText(StockConstants.VALUE_ERROR_MESSAGE);
 		}
 	}
 
@@ -152,7 +153,7 @@ public class InwardStockController {
 		InwardStockItem inwardStockItem = new InwardStockItem();
 		inwardStockItem.setLotNo(lotNo.getText());
 		inwardStockItem.setColdNo(Integer.parseInt(coldNo.getText()));
-		inwardStockItem.setItem(itemList.getValue());
+		inwardStockItem.setItem(itemList.getValue().toString());
 		inwardStockItem.setQuantity(Integer.parseInt(quantity.getText()));
 		if (!rate.getText().isEmpty())
 			inwardStockItem.setRate(Float.parseFloat(rate.getText()));
@@ -174,7 +175,7 @@ public class InwardStockController {
 			makeInwardStockItemsAndSave(stock);
 			successMessage.setText("Lot added successfully.");
 		} catch (Exception e) {
-			successMessage.setText("Make sure you have entererd all fields correctly !");
+			successMessage.setText(StockConstants.VALUE_ERROR_MESSAGE);
 		}
 		clearOverallUI();
 	}
@@ -186,7 +187,7 @@ public class InwardStockController {
 			maxKey = Collections.max(((InwardStockJsonModel) jsonStockModel).getStockMap().keySet());
 		stock.setStockId(maxKey + 1);
 		((InwardStockJsonModel) jsonStockModel).setStockMap(stock);
-		jsonStockModel.writeObjectToJson("InwardStock", ((InwardStockJsonModel) jsonStockModel).getStockMap());
+		jsonStockModel.writeObjectToJson(InwardStock.class.getSimpleName(), ((InwardStockJsonModel) jsonStockModel).getStockMap());
 	}
 
 	private void makeInwardStockItemsAndSave(InwardStock stock) {
@@ -212,7 +213,7 @@ public class InwardStockController {
 			maxKey = Collections.max(((InwardStockItemJsonModel) jsonStockItemModel).getStockItemMap().keySet());
 		item.setRecordId(maxKey + 1);
 		((InwardStockItemJsonModel) jsonStockItemModel).setStockItemMap(item);
-		jsonStockItemModel.writeObjectToJson("InwardStockItem",
+		jsonStockItemModel.writeObjectToJson(InwardStockItem.class.getSimpleName(),
 				((InwardStockItemJsonModel) jsonStockItemModel).getStockItemMap());
 	}
 
@@ -233,7 +234,7 @@ public class InwardStockController {
 		itemListTable.setItems(null);
 		coldStoreList.setValue("");
 		vyaapariList.setValue("");
-		itemList.setValue("");
+		itemList.setValue(null);
 		addItemList = new ArrayList<>();
 		clearUI();
 	}
@@ -254,16 +255,9 @@ public class InwardStockController {
 		return FXCollections.observableList(vyaapariNameList);
 	}
 
-	private ObservableList<String> makeItemsList() {
-		List<String> itemsList = new ArrayList<>();
-		try{
-			Map<Integer, Object> itemMap = new JSONParser().getObjectFromJsonFile("ItemList");
-			itemMap.entrySet().forEach(item -> itemsList.add(((Item)item.getValue()).getItemName()));
-			Collections.sort(itemsList);
-		} catch (IOException e) {
-			log.debug(e.getMessage());
-		}
-		return FXCollections.observableList(itemsList);
+	private ObservableList<Item> makeItemsList() {
+		jsonItemModel.makeListAndMapFromJson();
+		return FXCollections.observableList(((ItemJsonModel)jsonItemModel).getItemList());
 	}
 
 	@FXML

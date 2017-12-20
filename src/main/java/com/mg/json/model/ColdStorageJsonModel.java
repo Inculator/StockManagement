@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.ColdStorage;
 import com.mg.json.controller.JsonHandlerInterface;
+import com.mg.json.controller.JsonReferenceInterface;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ColdStorageJsonModel implements JsonHandlerInterface {
+public class ColdStorageJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
 	private List<ColdStorage> coldStoreList;
 	private Map<Integer, Object> coldStoreMap;
@@ -17,7 +19,7 @@ public class ColdStorageJsonModel implements JsonHandlerInterface {
 	@Override
 	public void makeListAndMapFromJson() {
 		coldStoreMap = new HashMap<>();
-		coldStoreMap = getObjectFromJsonFile("ColdStorage");
+		coldStoreMap = getObjectFromJsonFile(ColdStorage.class.getSimpleName());
 		coldStoreList = new ArrayList(coldStoreMap.values());
 	}
 
@@ -33,4 +35,9 @@ public class ColdStorageJsonModel implements JsonHandlerInterface {
 		this.coldStoreMap.put(cold.getColdId(), cold);
 	}
 
+	@Override
+	public TypeReference<?> getTypeReference() {
+		return  new TypeReference<Map<Integer, ColdStorage>>() {
+		};
+	}
 }

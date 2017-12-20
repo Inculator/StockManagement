@@ -12,8 +12,8 @@ import com.mg.jsonhandler.JSONWriter;
 public interface JsonHandlerInterface {
 
 	public final static Logger log = Logger.getLogger(JsonHandlerInterface.class);
-	public static final JSONWriter jsonWriter = new JSONWriter();
-	public static final JSONParser jsonParser = new JSONParser();
+	public final JSONWriter jsonWriter = new JSONWriter();
+	public final JSONParser jsonParser = new JSONParser();
 
 	default void writeObjectToJson(String fileName, Map<Integer, Object> jsonObject) {
 		jsonWriter.writeObjectToJson(fileName, jsonObject);
