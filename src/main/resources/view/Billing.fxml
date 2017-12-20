@@ -15,8 +15,8 @@
         <TableView fx:id="stockListView" layoutX="105.0" layoutY="14.0" prefHeight="196.0" prefWidth="729.0">
           <columns>
             <TableColumn fx:id="entryDate" maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Date" />
-            <TableColumn fx:id="itemColdNo" maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Cold No." />
-            <TableColumn fx:id="itemLotNo" maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Lot No" />
+            <TableColumn fx:id="itemColdNo" maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Cold Lot No." />
+            <TableColumn fx:id="itemLotNo" maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Marka" />
             <TableColumn fx:id="itemQuantity" maxWidth="5000.0" minWidth="10.0" prefWidth="79.0" text="Quantity" />
             <TableColumn fx:id="itemBhada" maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Rate/Bag/Month" />
             <TableColumn fx:id="itemColdStore" maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" text="Cold Store" />

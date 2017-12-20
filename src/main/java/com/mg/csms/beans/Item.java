@@ -29,4 +29,9 @@ public class Item implements Serializable {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return itemName;
+	}
+
 }

@@ -2,15 +2,18 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="500.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.AddItemController">
+<AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="500.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.AddItemController">
 	<children>
       <Label layoutX="236.0" layoutY="53.0" text="Item Name" />
 		<TextField fx:id="itemName" layoutX="338.0" layoutY="49.0" prefWidth="144.9978125" />
       <Button fx:id="addItemButton" layoutX="318.0" layoutY="99.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="130.0" text="Add Item" />
-      <Text fx:id="successMessage" layoutX="62.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="successMessage" layoutX="284.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <ListView fx:id="itemListView" layoutX="261.0" layoutY="195.0" prefHeight="256.0" prefWidth="244.0" />
+      <Button layoutX="258.0" layoutY="461.0" mnemonicParsing="false" text="DELETE ITEM" onAction="#deleteItemAction"/>
 	</children>
 </AnchorPane>

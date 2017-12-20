@@ -35,19 +35,19 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab fx:id="addVyaapari" closable="false" text="Add New Vyaapari">
+        <Tab fx:id="addVyaapari" closable="false" text="Add New Vyapari">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
                 <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="70.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" underline="false" />
                 <DatePicker fx:id="vyaapariDate" layoutX="235.0" layoutY="53.0" prefHeight="25.0" prefWidth="183.0" />
-                <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="101.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyaapari Name" textAlignment="CENTER" underline="false" />
+                <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="101.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyapari Name" textAlignment="CENTER" underline="false" />
                 <TextField fx:id="vyaapariName" layoutX="236.0" layoutY="85.0" prefHeight="25.0" prefWidth="183.0" />
-                <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="132.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyaapari Address" textAlignment="CENTER" underline="false" />
+                <Text fontSmoothingType="LCD" layoutX="137.0" layoutY="132.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyapari Address" textAlignment="CENTER" underline="false" />
                 <TextField fx:id="vyaapariAddress" layoutX="236.0" layoutY="116.0" prefHeight="25.0" prefWidth="183.0" promptText="Complete Address" />
                 <Text fontSmoothingType="LCD" layoutX="139.0" layoutY="160.0" scaleX="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone No" textAlignment="CENTER" underline="false" />
                 <TextField fx:id="vyaapariNumber" layoutX="235.0" layoutY="146.0" prefHeight="25.0" prefWidth="183.0" promptText="9999999999" />
-                <Button fx:id="addVyaapariButton" layoutX="251.0" layoutY="197.0" mnemonicParsing="false" onAction="#addVyaapari" prefHeight="41.0" prefWidth="142.0" text="Add Vyaapari" />
+                <Button fx:id="addVyaapariButton" layoutX="251.0" layoutY="197.0" mnemonicParsing="false" onAction="#addVyaapari" prefHeight="41.0" prefWidth="142.0" text="Add Vyapari" />
                 <Text fx:id="successMessage1" layoutX="56.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
               </children>
             </AnchorPane>
@@ -55,32 +55,34 @@
         </Tab>
         <Tab fx:id="coldStoreListTab" closable="false" text="LIST COLD">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="732.0">
               <children>
-                <TableView fx:id="coldListView" layoutX="131.0" layoutY="49.0" prefHeight="200.0" prefWidth="482.0">
+                <TableView fx:id="coldListView" layoutX="131.0" layoutY="49.0" prefHeight="195.0" prefWidth="482.0">
                   <columns>
                     <TableColumn fx:id="listColdName" maxWidth="5000.0" minWidth="10.0" prefWidth="139.0" text="Name" />
                     <TableColumn fx:id="listColdPhone" maxWidth="5000.0" minWidth="10.0" prefWidth="168.0" text="Phone Number" />
                     <TableColumn fx:id="listColdAddress" maxWidth="5000.0" minWidth="10.0" prefWidth="174.0" text="Address" />
                   </columns>
                 </TableView>
+                        <Button fx:id="deleteColdStore" layoutX="132.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteColdStoreAction" text="DELETE COLD STORE" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
-        <Tab fx:id="vyaapariListTab" closable="false" text="LIST VYAAPARI">
+        <Tab fx:id="vyaapariListTab" closable="false" text="LIST VYAPARI">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="744.0">
               <children>
-                <AnchorPane id="Content" layoutX="0.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="276.0" prefWidth="744.0">
+                <AnchorPane id="Content" layoutX="0.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="744.0">
                   <children>
-                    <TableView fx:id="vyaapariListView" layoutX="130.0" layoutY="50.0" prefHeight="200.0" prefWidth="485.0">
+                    <TableView fx:id="vyaapariListView" layoutX="130.0" layoutY="46.0" prefHeight="200.0" prefWidth="485.0">
                       <columns>
                         <TableColumn fx:id="listVyaapariName" maxWidth="5000.0" minWidth="10.0" prefWidth="161.0" text="Name" />
                         <TableColumn fx:id="listVyaapariPhone" maxWidth="5000.0" minWidth="10.0" prefWidth="158.0" text="Phone Number" />
                         <TableColumn fx:id="listVyaapariAddress" maxWidth="5000.0" minWidth="10.0" prefWidth="164.0" text="Address" />
                       </columns>
                     </TableView>
+                              <Button fx:id="deleteVyapari" layoutX="130.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteVyapariAction" text="DELETE VYAPARI" />
                   </children>
                 </AnchorPane>
               </children>

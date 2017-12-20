@@ -150,7 +150,7 @@ public class InwardStockController {
 
 	private InwardStockItem addInwardStockItem() {
 		InwardStockItem inwardStockItem = new InwardStockItem();
-		inwardStockItem.setLotNo(Integer.parseInt(lotNo.getText()));
+		inwardStockItem.setLotNo(lotNo.getText());
 		inwardStockItem.setColdNo(Integer.parseInt(coldNo.getText()));
 		inwardStockItem.setItem(itemList.getValue());
 		inwardStockItem.setQuantity(Integer.parseInt(quantity.getText()));

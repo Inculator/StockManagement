@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="621.0" prefWidth="960.0" visible="true" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoginController">
+<AnchorPane prefHeight="621.0" prefWidth="960.0" visible="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.initialize.controller.LoginController">
   <children>
     <HBox alignment="CENTER" layoutX="2.0" layoutY="-3.0" prefHeight="622.0" prefWidth="960.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-3.0">
       <children>
@@ -21,14 +23,14 @@
           <children>
             <AnchorPane fx:id="apDesignPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="612.0" prefWidth="720.0">
               <children>
-                <Label layoutX="174.0" layoutY="71.0" prefHeight="70.0" prefWidth="612.0" text="Stock Management System" textFill="#569900">
+                <Label layoutX="174.0" layoutY="71.0" prefHeight="58.0" prefWidth="554.0" text="Stock Management System" textFill="#569900">
                   <font>
-                    <Font name="Meiryo Bold Italic" size="42.0" />
+                    <Font name="Meiryo Bold Italic" size="35.0" />
                   </font>
                 </Label>
-                <AnchorPane focusTraversable="false" layoutX="161.0" layoutY="158.0" minHeight="258.0" prefHeight="308.0" prefWidth="554.0" style="-fx-background-color: #0072;" AnchorPane.bottomAnchor="146.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="158.0">
+                <AnchorPane focusTraversable="false" layoutX="161.0" layoutY="176.0" minHeight="258.0" prefHeight="308.0" prefWidth="554.0" style="-fx-background-color: #0072;" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="176.0">
                   <children>
-                    <GridPane layoutX="75.0" layoutY="28.0" prefHeight="168.0" prefWidth="342.0" vgap="10.0">
+                    <GridPane layoutX="147.0" layoutY="30.0" prefHeight="168.0" prefWidth="342.0" vgap="10.0">
                       <children>
                         <TextField fx:id="tfUserName" prefHeight="46.0" prefWidth="342.0" promptText="User Name" GridPane.columnSpan="2" />
                         <PasswordField fx:id="pfUserPassword" prefHeight="44.0" prefWidth="342.0" promptText="Password" GridPane.columnSpan="2" GridPane.rowIndex="1" />
@@ -42,14 +44,20 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       </rowConstraints>
                     </GridPane>
-                    <Button fx:id="btnLogin" layoutX="175.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="35.0" prefWidth="143.0" text="Log In" />
+                    <Button fx:id="btnLogin" layoutX="147.0" layoutY="208.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="35.0" prefWidth="143.0" text="Log In" />
                     <Text fx:id="successMessage" fill="#4208e1" fontSmoothingType="LCD" layoutX="14.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font></Text>
+                              <Text layoutX="291.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make sure you have Java verion 1.8 or above." />
+                              <ImageView fitHeight="117.0" fitWidth="111.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/logo.jpg" />
+                                 </image>
+                              </ImageView>
                   </children>
                 </AnchorPane>
-                        <Text fill="#660000" layoutX="301.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed By: MOHAK GUPTA " wrappingWidth="357.99999513477087">
+                        <Text fill="#660000" layoutX="259.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed By: MOHAK GUPTA" wrappingWidth="357.99999513477087">
                            <font>
                               <Font name="System Italic" size="26.0" />
                            </font>

@@ -97,7 +97,11 @@ public class DemandController {
 
 	@FXML
 	private void addDemandToList() {
-		itemListTable.setItems(getDemandItem());
+		try {
+			itemListTable.setItems(getDemandItem());
+		}catch(Exception e){
+			successMessage.setText("Make sure you have entererd all fields correctly !");
+		}
 	}
 
 	private ObservableList<Demand> getDemandItem() {
@@ -126,6 +130,8 @@ public class DemandController {
 		try {
 			successMessage.setText("");
 			makeDemandItemsAndSave();
+			if(itemListTable.getItems().isEmpty())
+				successMessage.setText("Make sure you have added an Entry !");
 		} catch (Exception e) {
 			log.debug(e);
 			successMessage.setText("Some Error Occured !!! Make sure you have entererd all fields correctly !");
@@ -150,7 +156,7 @@ public class DemandController {
 					successMessage.setText(errorMessage.toString());
 			} else
 				successMessage.setText("Cold Id " + demandItem.getColdNo()
-						+ " is not correct ! Verify that you made an entry in stock earlier.");
+				+ " is not correct ! Verify that you made an entry in stock earlier.");
 		});
 	}
 
@@ -201,8 +207,8 @@ public class DemandController {
 							+ ". Available: " + item.get().getBalance());
 				else
 					errorMessage
-							.append(errorMessage + MESSAGE_SEPERATOR + "Insufficient quantity avaiable for COLD No: "
-									+ item.get().getColdNo() + ". Available: " + item.get().getBalance());
+					.append(errorMessage + MESSAGE_SEPERATOR + "Insufficient quantity avaiable for COLD No: "
+							+ item.get().getColdNo() + ". Available: " + item.get().getBalance());
 			else {
 				item.get().setBalance(balance);
 				jsonStockItemModel.makeListAndMapFromJson();

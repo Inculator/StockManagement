@@ -40,7 +40,7 @@
             <fx:include fx:id="paidBill" source="PaidBill.fxml" />
           </content>
         </Tab>
-        <Tab fx:id="coldVyaapariTab" closable="false" text="Cold/Vyaapari">
+        <Tab fx:id="coldVyaapariTab" closable="false" text="Cold/Vyapari">
           <content>
             <fx:include id="customerDetails" fx:id="coldVyaapariDetails" source="ColdStorage.fxml" />
           </content>

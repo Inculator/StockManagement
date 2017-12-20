@@ -17,7 +17,7 @@ public class InwardStockItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer recordId;
 	private Integer stockId;
-	private Integer lotNo;
+	private String lotNo;
 	private Integer coldNo;
 	private String item;
 	private Integer quantity;
@@ -47,11 +47,11 @@ public class InwardStockItem implements Serializable {
 		this.stockId = stockId;
 	}
 
-	public Integer getLotNo() {
+	public String getLotNo() {
 		return lotNo;
 	}
 
-	public void setLotNo(Integer lotNo) {
+	public void setLotNo(String lotNo) {
 		this.lotNo = lotNo;
 	}
 

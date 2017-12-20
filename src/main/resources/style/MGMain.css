@@ -41,6 +41,12 @@ AnchorPane{
     -fx-background-color: white;
     -fx-padding: 0px;
 }
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: rgb(204,255,255);
+}
+.choice-box .menu-item:focused { 
+	-fx-background-color: rgb(204,255,255);
+}
 .text-field{
 	-fx-border-color: ORANGE;
 }

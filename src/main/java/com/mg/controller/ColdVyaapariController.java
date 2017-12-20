@@ -84,8 +84,14 @@ public class ColdVyaapariController {
 	@FXML
 	private Text successMessage1;
 
+	@FXML
+	private Button deleteVyapari;
+	@FXML
+	private Button deleteColdStore;
+
 	private JsonHandlerInterface jsonColdHandler;
 	private JsonHandlerInterface jsonVyaapariHandler;
+
 
 	@FXML
 	protected void initialize() {
@@ -134,6 +140,7 @@ public class ColdVyaapariController {
 		listColdName.setCellValueFactory(new PropertyValueFactory<ColdStorage, String>("coldName"));
 		listColdPhone.setCellValueFactory(new PropertyValueFactory<ColdStorage, String>("phoneNo"));
 		listColdAddress.setCellValueFactory(new PropertyValueFactory<ColdStorage, String>("address"));
+		coldListView.setItems(null);
 		if (!((ColdStorageJsonModel) jsonColdHandler).getColdStoreList().isEmpty())
 			coldListView.setItems(
 					FXCollections.observableList(((ColdStorageJsonModel) jsonColdHandler).getColdStoreList()));
@@ -144,6 +151,7 @@ public class ColdVyaapariController {
 		listVyaapariName.setCellValueFactory(new PropertyValueFactory<Vyaapari, String>("vyaapariName"));
 		listVyaapariPhone.setCellValueFactory(new PropertyValueFactory<Vyaapari, String>("phoneNo"));
 		listVyaapariAddress.setCellValueFactory(new PropertyValueFactory<Vyaapari, String>("address"));
+		vyaapariListView.setItems(null);
 		if (!((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariList().isEmpty())
 			vyaapariListView.setItems(
 					FXCollections.observableList(((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariList()));
@@ -159,7 +167,7 @@ public class ColdVyaapariController {
 			makeColdStoreList();
 			clearUI();
 		} catch (Exception e) {
-			successMessage.setText("Make sure you have entererd all fields correctly !");
+			successMessage.setText("Make sure you have entererd Name correctly !");
 		}
 	}
 
@@ -173,10 +181,14 @@ public class ColdVyaapariController {
 	}
 
 	private ColdStorage makeColdStorage(ColdStorage cold) {
-		cold.setAddress(coldAdd.getText());
-		cold.setPhoneNo(Long.parseLong(coldPhone.getText()));
-		cold.setDate(DateUtils.makeDate(coldDate));
+		if(coldName.getText() == null || "".equalsIgnoreCase(coldName.getText()))
+			throw new NullPointerException();
 		cold.setColdName(coldName.getText());
+		if (!coldAdd.getText().isEmpty())
+			cold.setAddress(coldAdd.getText());
+		if (!coldPhone.getText().isEmpty())
+			cold.setPhoneNo(Long.parseLong(coldPhone.getText()));
+		cold.setDate(DateUtils.makeDate(coldDate));
 		return cold;
 	}
 
@@ -190,7 +202,7 @@ public class ColdVyaapariController {
 			makeVyaapariList();
 			clearUI();
 		} catch (Exception e) {
-			successMessage1.setText("Make sure you have entererd all fields correctly !");
+			successMessage1.setText("Make sure you have entererd Name correctly !");
 		}
 	}
 
@@ -204,10 +216,14 @@ public class ColdVyaapariController {
 	}
 
 	private Vyaapari makeVyaapari(Vyaapari vyaapari) {
-		vyaapari.setAddress(vyaapariAddress.getText());
-		vyaapari.setPhoneNo(Long.parseLong(vyaapariNumber.getText()));
-		vyaapari.setDate(DateUtils.makeDate(vyaapariDate));
+		if(vyaapariName.getText() == null || "".equalsIgnoreCase(vyaapariName.getText()))
+			throw new NullPointerException();
 		vyaapari.setVyaapariName(vyaapariName.getText());
+		if (!vyaapariAddress.getText().isEmpty())
+			vyaapari.setAddress(vyaapariAddress.getText());
+		if (!vyaapariNumber.getText().isEmpty())
+			vyaapari.setPhoneNo(Long.parseLong(vyaapariNumber.getText()));
+		vyaapari.setDate(DateUtils.makeDate(vyaapariDate));
 		return vyaapari;
 	}
 
@@ -218,6 +234,20 @@ public class ColdVyaapariController {
 		vyaapariName.setText("");
 		vyaapariAddress.setText("");
 		vyaapariNumber.setText("");
+	}
+
+	@FXML
+	protected void deleteColdStoreAction(){
+		((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap().remove(coldListView.getSelectionModel().getSelectedItem().getColdId());
+		jsonColdHandler.writeObjectToJson("ColdStorage", ((ColdStorageJsonModel) jsonColdHandler).getColdStoreMap());
+		makeColdStoreList();
+	}
+
+	@FXML
+	protected void deleteVyapariAction(){
+		((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap().remove(vyaapariListView.getSelectionModel().getSelectedItem().getVyaapariId());
+		jsonVyaapariHandler.writeObjectToJson("Vyaapari", ((VyaapariJsonModel) jsonVyaapariHandler).getVyaapariMap());
+		makeVyaapariList();
 	}
 
 }
