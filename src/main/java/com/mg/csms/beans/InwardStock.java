@@ -15,6 +15,7 @@ import com.mg.localdate.LocalDateSerializer;
 public class InwardStock implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	public static final String NAME = "InwardStock";
 
 	private Integer stockId;
 	@JsonDeserialize(using = LocalDateDeserializer.class)

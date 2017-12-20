@@ -9,10 +9,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.Vyaapari;
 import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.controller.JsonReferenceInterface;
+import com.mg.weld.TypeAnnotation;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
+@TypeAnnotation(VyaapariJsonModel.modelType)
 public class VyaapariJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
+	public static final String modelType = Vyaapari.NAME;
 	private List<Vyaapari> vyaapariList;
 	private Map<Integer, Object> vyaapariMap;
 
@@ -37,7 +40,7 @@ public class VyaapariJsonModel implements JsonHandlerInterface, JsonReferenceInt
 
 	@Override
 	public TypeReference<?> getTypeReference() {
-		return  new TypeReference<Map<Integer, Vyaapari>>() {
+		return new TypeReference<Map<Integer, Vyaapari>>() {
 		};
 	}
 

@@ -9,9 +9,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.ColdStorage;
 import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.controller.JsonReferenceInterface;
+import com.mg.weld.TypeAnnotation;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
+@TypeAnnotation(ColdStorageJsonModel.modelType)
 public class ColdStorageJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
+
+	public static final String modelType = ColdStorage.NAME;
 
 	private List<ColdStorage> coldStoreList;
 	private Map<Integer, Object> coldStoreMap;
@@ -37,7 +41,7 @@ public class ColdStorageJsonModel implements JsonHandlerInterface, JsonReference
 
 	@Override
 	public TypeReference<?> getTypeReference() {
-		return  new TypeReference<Map<Integer, ColdStorage>>() {
+		return new TypeReference<Map<Integer, ColdStorage>>() {
 		};
 	}
 }

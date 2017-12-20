@@ -10,14 +10,17 @@ import com.mg.csms.beans.BillingDetails;
 import com.mg.csms.beans.InwardStockItem;
 import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.controller.JsonReferenceInterface;
+import com.mg.weld.TypeAnnotation;
 
 /**
  * @author Mohak Gupta
  *
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
+@TypeAnnotation(BillingJsonModel.modelType)
 public class BillingJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
+	public static final String modelType = BillingDetails.NAME;
 	private List<BillingDetails> billingList;
 	private Map<Integer, Object> billingMap;
 
@@ -57,7 +60,7 @@ public class BillingJsonModel implements JsonHandlerInterface, JsonReferenceInte
 
 	@Override
 	public TypeReference<?> getTypeReference() {
-		return  new TypeReference<Map<Integer, BillingDetails>>() {
+		return new TypeReference<Map<Integer, BillingDetails>>() {
 		};
 	}
 }

@@ -9,10 +9,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.InwardStock;
 import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.controller.JsonReferenceInterface;
+import com.mg.weld.TypeAnnotation;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
+@TypeAnnotation(InwardStockJsonModel.modelType)
 public class InwardStockJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
+	public static final String modelType = InwardStock.NAME;
 	private List<InwardStock> stockList;
 	private Map<Integer, Object> stockMap;
 
@@ -37,7 +40,7 @@ public class InwardStockJsonModel implements JsonHandlerInterface, JsonReference
 
 	@Override
 	public TypeReference<?> getTypeReference() {
-		return  new TypeReference<Map<Integer, InwardStock>>() {
+		return new TypeReference<Map<Integer, InwardStock>>() {
 		};
 	}
 }

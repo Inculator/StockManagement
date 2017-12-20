@@ -15,6 +15,8 @@ import com.mg.localdate.LocalDateSerializer;
 public class ColdStorage extends Contact implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public static final String NAME = "ColdStorage";
 	private Integer coldId;
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)

@@ -5,11 +5,15 @@ import java.io.Serializable;
 public class Item implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	public static final String NAME = "Item";
+
 	private Integer id;
 	private String itemName;
 
-	public Item(){}
-	public Item(String itemName){
+	public Item() {
+	}
+
+	public Item(String itemName) {
 		this.itemName = itemName;
 	}
 

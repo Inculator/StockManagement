@@ -9,10 +9,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.mg.csms.beans.Demand;
 import com.mg.json.controller.JsonHandlerInterface;
 import com.mg.json.controller.JsonReferenceInterface;
+import com.mg.weld.TypeAnnotation;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
+@TypeAnnotation(DemandJsonModel.modelType)
 public class DemandJsonModel implements JsonHandlerInterface, JsonReferenceInterface {
 
+	public static final String modelType = Demand.NAME;
 	private List<Demand> demandList;
 	private Map<Integer, Object> demandMap;
 
@@ -37,7 +40,7 @@ public class DemandJsonModel implements JsonHandlerInterface, JsonReferenceInter
 
 	@Override
 	public TypeReference<?> getTypeReference() {
-		return  new TypeReference<Map<Integer, Demand>>() {
+		return new TypeReference<Map<Integer, Demand>>() {
 		};
 	}
 }

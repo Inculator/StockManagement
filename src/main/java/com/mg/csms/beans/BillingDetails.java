@@ -8,6 +8,7 @@ public class BillingDetails extends InwardStockItem {
 
 	private static final long serialVersionUID = 1L;
 
+	public static final String NAME = "BillingDetails";
 	private Integer bhada;
 	private Integer totalBillAmount;
 	private Boolean isPaid = false;

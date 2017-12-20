@@ -44,9 +44,9 @@ public class AddItemController {
 	@FXML
 	public void addItem() {
 		Item item = new Item(itemName.getText());
-		if("".equalsIgnoreCase(item.getItemName()))
+		if ("".equalsIgnoreCase(item.getItemName()))
 			successMessage.setText(StockConstants.VALUE_ERROR_MESSAGE);
-		else{
+		else {
 			writeItemObjectToJson(item);
 			successMessage.setText("Item Added successfully !");
 		}
@@ -60,7 +60,7 @@ public class AddItemController {
 			maxKey = Collections.max(((ItemJsonModel) jsonItemModel).getItemMap().keySet());
 		item.setId(maxKey + 1);
 		((ItemJsonModel) jsonItemModel).setItemMap(item);
-		jsonItemModel.writeObjectToJson(Item.class.getName(), ((ItemJsonModel) jsonItemModel).getItemMap());
+		jsonItemModel.writeObjectToJson(Item.class.getSimpleName(), ((ItemJsonModel) jsonItemModel).getItemMap());
 	}
 
 	private void updateItemListView() {
@@ -73,10 +73,16 @@ public class AddItemController {
 	}
 
 	@FXML
-	protected void deleteItemAction(){
-		((ItemJsonModel) jsonItemModel).getItemMap().remove(itemListView.getSelectionModel().getSelectedItem().getId());
-		jsonItemModel.writeObjectToJson(Item.class.getSimpleName(), ((ItemJsonModel) jsonItemModel).getItemMap());
-		updateItemListView();
+	protected void deleteItemAction() {
+		if (itemListView.getItems() == null || itemListView.getSelectionModel().getSelectedItem() == null)
+			successMessage.setText("Select a Record to Delete !");
+		else {
+			((ItemJsonModel) jsonItemModel).getItemMap()
+					.remove(itemListView.getSelectionModel().getSelectedItem().getId());
+			jsonItemModel.writeObjectToJson(Item.class.getSimpleName(), ((ItemJsonModel) jsonItemModel).getItemMap());
+			updateItemListView();
+			successMessage.setText("Item Removed !");
+		}
 	}
 
 }

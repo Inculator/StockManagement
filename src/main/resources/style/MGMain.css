@@ -57,9 +57,8 @@ AnchorPane{
 	-fx-font-weight: bold;
 }
 .text{
-	-fx-font-family: 'Verdana',Verdana;
+	-fx-font-family: 'Helvetica',Helvetica;
 	-fx-font-style: italic ;
 	-fx-font-size: 12px ;
 	-fx-font-weight: bold;
-	-fx-fill: Blue;
 }

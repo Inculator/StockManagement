@@ -15,6 +15,8 @@ import com.mg.localdate.LocalDateSerializer;
 public class InwardStockItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	public static final String NAME = "InwardStockItem";
+
 	private Integer recordId;
 	private Integer stockId;
 	private String lotNo;

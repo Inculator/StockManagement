@@ -8,6 +8,9 @@ import com.mg.localdate.LocalDateDeserializer;
 import com.mg.localdate.LocalDateSerializer;
 
 public class Demand {
+
+	public static final String NAME = "Demand";
+
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate demandDate;
@@ -64,6 +67,5 @@ public class Demand {
 	public void setBillAmount(Integer billAmount) {
 		this.billAmount = billAmount;
 	}
-
 
 }

@@ -15,6 +15,8 @@ import com.mg.localdate.LocalDateSerializer;
 public class Vyaapari extends Contact implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	public static final String NAME = "Vyaapari";
+
 	private Integer vyaapariId;
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
