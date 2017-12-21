@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
+import com.mg.csms.beans.BillingDetails;
+import com.mg.csms.beans.Demand;
+import com.mg.csms.beans.InwardStock;
+import com.mg.csms.beans.InwardStockItem;
 import com.mg.weld.TypeAnnotation;
 
 import javafx.scene.control.Label;
@@ -30,9 +34,24 @@ public class DeleteBackupController implements DialogHandlerFactory {
 				deleteDirectory(destinationPath);
 				FileUtils.copyDirectory(sourcePath, destinationPath);
 				deleteDirectory(sourcePath);
-				labelMessage.setText("BACKUP SUCCESSFUL. APPLICATION HAS BEEN RESET !");
+				labelMessage.setText("BACKUP SUCCESSFUL. APPLICATION HAS BEEN RESET ! /n" + "/n Please reopen the application to reflect changes !");
 			} catch (IOException e) {
 				log.error(ERROR_ADMIN);
 			}
+	}
+
+	@Override
+	public void deleteDirectory(File dir) {
+		if (dir.isDirectory()) {
+			File[] children = dir.listFiles();
+			for (int i = 0; i < children.length; i++)
+				deleteDirectory(children[i]);
+		}
+		if(isFileToBeDeleted(dir))
+			dir.delete();
+	}
+
+	private boolean isFileToBeDeleted(File dir) {
+		return dir.getName().contains(InwardStockItem.class.getSimpleName()) || dir.getName().contains(InwardStock.class.getSimpleName()) || dir.getName().contains(Demand.class.getSimpleName()) || dir.getName().contains(BillingDetails.class.getSimpleName());
 	}
 }

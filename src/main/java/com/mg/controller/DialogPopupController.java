@@ -37,7 +37,7 @@ public class DialogPopupController {
 
 	public void designScreen() {
 		final Stage dialog = new Stage();
-		dialog.initModality(Modality.APPLICATION_MODAL);
+		dialog.initModality(Modality.WINDOW_MODAL);
 		VBox dialogVbox = new VBox(20);
 		dialog.setTitle("Popup for Delete/Backup");
 		Label l1 = new Label("Drive for Backup");
@@ -101,14 +101,18 @@ public class DialogPopupController {
 					WeldManager.getInstance().find(DialogHandlerFactory.class, key).popupHanderAction(driveValue, labelMessage);
 				else
 					labelMessage.setText("Please enter a password");
-				password.setText("");
-				driveValue.setText("");
+				clearUI();
 			}
 			else
 				labelMessage.setText("Please enter a password/ Drive value !");
 		} catch (IOException e) {
 			log.error(ERROR_ADMIN);
 		}
+	}
+
+	private void clearUI() {
+		password.setText("");
+		driveValue.setText("");
 	}
 
 	public static DialogPopupController getInstance() {

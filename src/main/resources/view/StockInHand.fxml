@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="908.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.StockInHandController">
+<AnchorPane minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="908.0" stylesheets="@../style/MGMain.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mg.controller.StockInHandController">
   <!-- TODO Add Nodes -->
   <children>
     <Label layoutX="74.0" layoutY="19.0" prefHeight="25.0" prefWidth="61.0" text="Vyapari" />

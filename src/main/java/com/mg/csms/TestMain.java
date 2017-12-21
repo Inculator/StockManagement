@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import com.mg.csms.beans.ColdStorage;
+import com.mg.dialog.controller.factory.DeleteBackupController;
+import com.mg.dialog.controller.factory.DialogHandlerFactory;
 
 public class TestMain {
 
@@ -39,6 +41,8 @@ public class TestMain {
 			String directory = Paths.get(TestMain.class.getProtectionDomain().getCodeSource().getLocation().toURI())
 					.toString().substring(0, 1);
 			System.out.println(directory);
+			DialogHandlerFactory fact = new DeleteBackupController();
+			fact.deleteDirectory(null);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
