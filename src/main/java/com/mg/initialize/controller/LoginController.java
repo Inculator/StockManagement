@@ -54,10 +54,10 @@ public class LoginController {
 			Properties p = new Properties();
 			p.load(resourceStream);
 
-//			if (tfUserName.getText().equalsIgnoreCase(p.getProperty(USERNAME))
-//					&& pfUserPassword.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
+			if (tfUserName.getText().equalsIgnoreCase(p.getProperty(USERNAME))
+					&& pfUserPassword.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
 				makePane(VIEW_MAIN_MENU_FXML);
-//			else
+			else
 				successMessage.setText("Invalid Credentials !!!");
 		} catch (IOException e) {
 			e.printStackTrace();
