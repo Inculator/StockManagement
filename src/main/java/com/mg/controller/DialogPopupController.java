@@ -8,7 +8,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import com.mg.dialog.controller.factory.DialogHandlerFactory;
-import com.mg.weld.WeldManager;
+import com.mg.weld.WeldManagerFactory;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -98,7 +98,7 @@ public class DialogPopupController {
 
 			if (password != null && driveValue != null){
 				if (password.getText().equalsIgnoreCase(p.getProperty("password")))
-					WeldManager.getInstance().find(DialogHandlerFactory.class, key).popupHanderAction(driveValue, labelMessage);
+					WeldManagerFactory.getInstance().find(DialogHandlerFactory.class, key).popupHanderAction(driveValue, labelMessage);
 				else
 					labelMessage.setText("Please enter a password");
 				clearUI();

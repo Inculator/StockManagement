@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mg.json.controller.JsonReferenceInterface;
 import com.mg.stock.constant.StockConstants;
 import com.mg.utils.FilesPathUtils;
-import com.mg.weld.WeldManager;
+import com.mg.weld.WeldManagerFactory;
 
 /**
  * @author Mohak Gupta
@@ -25,7 +25,7 @@ public class JSONParser {
 		File file = new File(FilesPathUtils.getInstance().getRunningDirectoryPath() + StockConstants.DIRECTORY_PATH
 				+ fileName + StockConstants.JSON_SUFFIX);
 		if (file.exists())
-			referenceObject = WeldManager.getInstance().find(JsonReferenceInterface.class, fileName).getTypeReference();
+			referenceObject = WeldManagerFactory.getInstance().find(JsonReferenceInterface.class, fileName).getTypeReference();
 		else
 			return new HashMap<Integer, Object>();
 		return mapper.readValue(file, referenceObject);
