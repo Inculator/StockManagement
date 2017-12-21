@@ -57,6 +57,7 @@
 					<archive>
 						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
+					<finalName>StockManagement</finalName>
 				</configuration>
 			</plugin>
 		</plugins>
