@@ -1,73 +1,48 @@
 package com.mg.csms;
 
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import com.mg.csms.beans.ColdStorage;
-import com.mg.dialog.controller.factory.DeleteBackupController;
-import com.mg.dialog.controller.factory.DialogHandlerFactory;
+import javax.swing.filechooser.FileSystemView;
 
 public class TestMain {
 
 	public static void main(String[] args) {
+
 		/*
-		 * ColdStorage coldObject = makeColdObject(); ColdStorage coldObject1 =
-		 * makeColdObject1(); ObjectMapper mapper = new ObjectMapper(); File
-		 * file = new File("D:\\cold.json"); if (!file.exists()) try {
-		 * file.createNewFile(); } catch (IOException e1) { }
+		 * LocalDate endofCentury = LocalDate.of(2018, 12, 01); LocalDate now =
+		 * LocalDate.now();
 		 *
-		 * try { Map<Integer, ColdStorage> coldMap = mapper.readValue(file, new
-		 * TypeReference<Map<Integer, ColdStorage>>() { });
-		 * coldMap.put(coldObject.getColdId(), coldObject);
-		 * coldMap.put(coldObject1.getColdId(), coldObject1);
-		 * mapper.writeValue(file, coldMap);
-		 *
-		 * coldMap = mapper.readValue(file, new TypeReference<Map<Integer,
-		 * ColdStorage>>() { });
-		 *
-		 * System.out.println(coldMap.size()); } catch (IOException e) {
-		 * e.printStackTrace(); }
+		 * System.out.println(ChronoUnit.DAYS.between(now, endofCentury));
+		 * System.out.println((int) Math.ceil((double)
+		 * ChronoUnit.DAYS.between(now, endofCentury) / 30));
 		 */
+		FileSystemView fsv = FileSystemView.getFileSystemView();
+		File[] f = File.listRoots();
+		List<File> fileList = new ArrayList<>();
+		fileList = Arrays.asList(f);
 
-		LocalDate endofCentury = LocalDate.of(2018, 12, 01);
-		LocalDate now = LocalDate.now();
+		boolean isAuthenticDrive = fileList.stream()
+				.anyMatch(file -> fsv.getSystemDisplayName(file).equalsIgnoreCase("MOHAK GUPTA (G:)")
+						&& fsv.getSystemTypeDescription(file).equalsIgnoreCase("USB Drive"));
 
-		System.out.println(ChronoUnit.DAYS.between(now, endofCentury));
-		System.out.println((int) Math.ceil((double) ChronoUnit.DAYS.between(now, endofCentury) / 30));
+		System.out.println(isAuthenticDrive);
 
-		try {
-			String directory = Paths.get(TestMain.class.getProtectionDomain().getCodeSource().getLocation().toURI())
-					.toString().substring(0, 1);
-			System.out.println(directory);
-			DialogHandlerFactory fact = new DeleteBackupController();
-			fact.deleteDirectory(null);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+		for (int i = 0; i < f.length; i++) {
+			System.out.println("--------------------------------------");
+			System.out.println("Drive: " + f[i]);
+			System.out.println("Display name: " + fsv.getSystemDisplayName(f[i]));
+			System.out.println("Is drive: " + fsv.isDrive(f[i]));
+			System.out.println("Is floppy: " + fsv.isFloppyDrive(f[i]));
+			System.out.println("Readable: " + f[i].canRead());
+			System.out.println("Writable: " + f[i].canWrite());
+			System.out.println("Total space: " + f[i].getTotalSpace());
+			System.out.println("Usable space: " + f[i].getUsableSpace());
+			System.out.println(fsv.getSystemTypeDescription(f[i]));
 		}
 
 	}
 
-	private static ColdStorage makeColdObject() {
-		ColdStorage cold = new ColdStorage();
-		cold.setColdId(1);
-		cold.setColdName("Ambey Cold");
-		cold.setAddress("Kundli");
-		cold.setDate(LocalDate.now());
-		cold.setPhoneNo(8985878545L);
-
-		return cold;
-	}
-
-	private static ColdStorage makeColdObject1() {
-		ColdStorage cold = new ColdStorage();
-		cold.setColdId(4);
-		cold.setColdName("Ambey Cold");
-		cold.setAddress("Kundli");
-		cold.setDate(LocalDate.now());
-		cold.setPhoneNo(8985878785L);
-
-		return cold;
-	}
 }

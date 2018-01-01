@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.mg.authentication.utils.CheckDriveAuthentication;
+import com.mg.stock.constant.StockConstants;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -23,7 +26,6 @@ public class LoginController {
 
 	private static final String PASSWORD = "password";
 	private static final String USERNAME = "username";
-	private static final String RESOURCES_LOGIN_PROPERTIES = "login.properties";
 	private static final String VIEW_MAIN_MENU_FXML = "/view/MainMenu.fxml";
 
 	@FXML
@@ -49,19 +51,27 @@ public class LoginController {
 
 	@FXML
 	public void btnLogin() {
-		try (InputStream resourceStream = Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream(RESOURCES_LOGIN_PROPERTIES)) {
-			Properties p = new Properties();
-			p.load(resourceStream);
+		successMessage.setText("");
+		if (checkIfAuthenticDrive())
+			try (InputStream resourceStream = Thread.currentThread().getContextClassLoader()
+					.getResourceAsStream(StockConstants.RESOURCES_LOGIN_PROPERTIES)) {
+				Properties p = new Properties();
+				p.load(resourceStream);
 
-			if (tfUserName.getText().equalsIgnoreCase(p.getProperty(USERNAME))
-					&& pfUserPassword.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
-				makePane(VIEW_MAIN_MENU_FXML);
-			else
-				successMessage.setText("Invalid Credentials !!!");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+				if (tfUserName.getText().equalsIgnoreCase(p.getProperty(USERNAME))
+						&& pfUserPassword.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
+					makePane(VIEW_MAIN_MENU_FXML);
+				else
+					successMessage.setText("Invalid Credentials !!!");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		else
+			successMessage.setText("*** Please use authenticated software *** (Contact Administrator)");
+	}
+
+	private boolean checkIfAuthenticDrive() {
+		return new CheckDriveAuthentication().authenticationCheck();
 	}
 
 	private void makePane(String fxmlPath) {
