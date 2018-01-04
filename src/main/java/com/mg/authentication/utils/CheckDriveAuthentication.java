@@ -17,23 +17,16 @@ public class CheckDriveAuthentication implements CheckAuthenticDrive {
 
 	private static final String DRIVE_NAME = "driveName";
 	private static final String DRIVE_TYPE = "driveType";
-	private static final String DRIVE = "drive";
 	private Properties properties;
 
 	@Override
 	public boolean authenticationCheck() {
 		getPropertiesForAuth();
-		if (getRunningDirectoryPath().equalsIgnoreCase(properties.getProperty(DRIVE))) {
-			FileSystemView fsv = FileSystemView.getFileSystemView();
-			File[] f = File.listRoots();
-			List<File> fileList = new ArrayList<>();
-			fileList = Arrays.asList(f);
-			String driveDisplayName = properties.getProperty(DRIVE_NAME) + " (" + properties.getProperty(DRIVE)
-					+ ":)";
-			return fileList.stream().anyMatch(file -> fsv.getSystemDisplayName(file).equalsIgnoreCase(driveDisplayName)
-					&& fsv.getSystemTypeDescription(file).equalsIgnoreCase(properties.getProperty(DRIVE_TYPE)));
-		}
-		return false;
+		FileSystemView fsv = FileSystemView.getFileSystemView();
+		File[] f = File.listRoots();
+		List<File> fileList = new ArrayList<>();
+		fileList = Arrays.asList(f);
+		return fileList.stream().anyMatch(file -> isCorrectPath(fsv, file));
 	}
 
 	private void getPropertiesForAuth() {
@@ -46,4 +39,10 @@ public class CheckDriveAuthentication implements CheckAuthenticDrive {
 		}
 	}
 
+	private boolean isCorrectPath(FileSystemView fsv, File file) {
+		if (file.getAbsolutePath().substring(0, 1).equalsIgnoreCase(getRunningDirectoryPath()))
+			return fsv.getSystemTypeDescription(file).equalsIgnoreCase(properties.getProperty(DRIVE_TYPE))
+					&& fsv.getSystemDisplayName(file).contains(properties.getProperty(DRIVE_NAME));
+		return false;
+	}
 }

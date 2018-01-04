@@ -32,7 +32,7 @@ public class TestMain {
 
 		for (int i = 0; i < f.length; i++) {
 			System.out.println("--------------------------------------");
-			System.out.println("Drive: " + f[i]);
+			System.out.println("Drive: " + f[i].getAbsolutePath().substring(0, 1));
 			System.out.println("Display name: " + fsv.getSystemDisplayName(f[i]));
 			System.out.println("Is drive: " + fsv.isDrive(f[i]));
 			System.out.println("Is floppy: " + fsv.isFloppyDrive(f[i]));
@@ -40,9 +40,8 @@ public class TestMain {
 			System.out.println("Writable: " + f[i].canWrite());
 			System.out.println("Total space: " + f[i].getTotalSpace());
 			System.out.println("Usable space: " + f[i].getUsableSpace());
-			System.out.println(fsv.getSystemTypeDescription(f[i]));
+			System.out.println(fsv.getSystemTypeDescription(f[i]).contains("Removable"));
 		}
 
 	}
-
 }
