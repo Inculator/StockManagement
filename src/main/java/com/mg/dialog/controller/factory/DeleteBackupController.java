@@ -21,7 +21,7 @@ public class DeleteBackupController implements DialogHandlerFactory {
 
 	private static Logger log = Logger.getLogger(DeleteBackupController.class);
 
-	public DeleteBackupController(){
+	public DeleteBackupController() {
 		// Needed for Weld
 	}
 
@@ -34,7 +34,7 @@ public class DeleteBackupController implements DialogHandlerFactory {
 				deleteDirectory(destinationPath);
 				FileUtils.copyDirectory(sourcePath, destinationPath);
 				deleteDirectory(sourcePath);
-				labelMessage.setText("BACKUP SUCCESSFUL. APPLICATION HAS BEEN RESET ! /n" + "/n Please reopen the application to reflect changes !");
+				labelMessage.setText("BACKUP SUCCESSFUL. APPLICATION HAS BEEN RESET ! RESTART APPLICATION");
 			} catch (IOException e) {
 				log.error(ERROR_ADMIN);
 			}
@@ -47,11 +47,14 @@ public class DeleteBackupController implements DialogHandlerFactory {
 			for (int i = 0; i < children.length; i++)
 				deleteDirectory(children[i]);
 		}
-		if(isFileToBeDeleted(dir))
+		if (isFileToBeDeleted(dir))
 			dir.delete();
 	}
 
 	private boolean isFileToBeDeleted(File dir) {
-		return dir.getName().contains(InwardStockItem.class.getSimpleName()) || dir.getName().contains(InwardStock.class.getSimpleName()) || dir.getName().contains(Demand.class.getSimpleName()) || dir.getName().contains(BillingDetails.class.getSimpleName());
+		return dir.getName().contains(InwardStockItem.class.getSimpleName())
+				|| dir.getName().contains(InwardStock.class.getSimpleName())
+				|| dir.getName().contains(Demand.class.getSimpleName())
+				|| dir.getName().contains(BillingDetails.class.getSimpleName());
 	}
 }
