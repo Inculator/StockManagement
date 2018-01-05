@@ -39,10 +39,7 @@ public class CheckDriveAuthentication implements CheckAuthenticDrive {
 		}
 	}
 
-	private boolean isCorrectPath(FileSystemView fsv, File file) {
-		if (file.getAbsolutePath().substring(0, 1).equalsIgnoreCase(getRunningDirectoryPath()))
-			return fsv.getSystemTypeDescription(file).equalsIgnoreCase(properties.getProperty(DRIVE_TYPE))
-					&& fsv.getSystemDisplayName(file).contains(properties.getProperty(DRIVE_NAME));
-		return false;
+	private boolean isCorrectPath(FileSystemView fsv, File file) { // Enhance the code here
+		return file.getAbsolutePath().substring(0, 1).equalsIgnoreCase(getRunningDirectoryPath()) && fsv.getSystemDisplayName(file).contains(EncryptDecryptUtils.decrypt(properties.getProperty(DRIVE_NAME)));
 	}
 }

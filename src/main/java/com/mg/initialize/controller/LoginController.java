@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import com.mg.authentication.utils.CheckDriveAuthentication;
+import com.mg.authentication.utils.EncryptDecryptUtils;
 import com.mg.stock.constant.StockConstants;
 
 import javafx.fxml.FXML;
@@ -58,8 +59,8 @@ public class LoginController {
 				Properties p = new Properties();
 				p.load(resourceStream);
 
-				if (tfUserName.getText().equalsIgnoreCase(p.getProperty(USERNAME))
-						&& pfUserPassword.getText().equalsIgnoreCase(p.getProperty(PASSWORD)))
+				if (tfUserName.getText().equalsIgnoreCase(EncryptDecryptUtils.decrypt(p.getProperty(USERNAME)))
+						&& pfUserPassword.getText().equalsIgnoreCase(EncryptDecryptUtils.decrypt(p.getProperty(PASSWORD))))
 					makePane(VIEW_MAIN_MENU_FXML);
 				else
 					successMessage.setText("Invalid Credentials !!!");

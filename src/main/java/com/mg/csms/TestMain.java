@@ -1,24 +1,44 @@
 package com.mg.csms;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.filechooser.FileSystemView;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class TestMain {
 
 	public static void main(String[] args) {
 
-		/*
-		 * LocalDate endofCentury = LocalDate.of(2018, 12, 01); LocalDate now =
-		 * LocalDate.now();
-		 *
-		 * System.out.println(ChronoUnit.DAYS.between(now, endofCentury));
-		 * System.out.println((int) Math.ceil((double)
-		 * ChronoUnit.DAYS.between(now, endofCentury) / 30));
-		 */
+//		USB1();
+
+		encryptDecrypt();
+
+
+	}
+
+	private static void encryptDecrypt() {
+		try {
+			String strip = "Data";
+			byte[] encryptArray = Base64.encodeBase64(strip.getBytes());
+			String encstr = new String(encryptArray,"UTF-8");
+			System.out.println("Enc   >>  "+ encstr);
+
+			String strDec = "QVRUSVVUVEFN";
+			byte[] dectryptArray = strDec.getBytes();
+			byte[] decarray = Base64.decodeBase64(dectryptArray);
+			String decstr = new String(decarray,"UTF-8");
+			System.out.println("Dec  >>>  "+ decstr);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void USB1() {
 		FileSystemView fsv = FileSystemView.getFileSystemView();
 		File[] f = File.listRoots();
 		List<File> fileList = new ArrayList<>();
@@ -42,6 +62,5 @@ public class TestMain {
 			System.out.println("Usable space: " + f[i].getUsableSpace());
 			System.out.println(fsv.getSystemTypeDescription(f[i]).contains("Removable"));
 		}
-
 	}
 }
