@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.mg.authentication.utils.EncryptDecryptUtils;
 import com.mg.dialog.controller.factory.DialogHandlerFactory;
 import com.mg.weld.WeldManagerFactory;
 
@@ -96,14 +97,14 @@ public class DialogPopupController {
 			Properties p = new Properties();
 			p.load(resourceStream);
 
-			if (password != null && driveValue != null){
-				if (password.getText().equalsIgnoreCase(p.getProperty("password")))
-					WeldManagerFactory.getInstance().find(DialogHandlerFactory.class, key).popupHanderAction(driveValue, labelMessage);
+			if (password != null && driveValue != null) {
+				if (password.getText().equalsIgnoreCase(EncryptDecryptUtils.decrypt(p.getProperty("password"))))
+					WeldManagerFactory.getInstance().find(DialogHandlerFactory.class, key).popupHanderAction(driveValue,
+							labelMessage);
 				else
 					labelMessage.setText("Please enter a password");
 				clearUI();
-			}
-			else
+			} else
 				labelMessage.setText("Please enter a password/ Drive value !");
 		} catch (IOException e) {
 			log.error(ERROR_ADMIN);
