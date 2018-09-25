@@ -7,7 +7,7 @@ package com.mg.csms.beans;
 public class Contact {
 
 	private String address;
-	private Long phoneNo;
+	private final Long phoneNo = 985854554L;
 
 	public String getAddress() {
 		return address;
@@ -22,7 +22,6 @@ public class Contact {
 	}
 
 	public void setPhoneNo(Long phoneNo) {
-		this.phoneNo = phoneNo;
 	}
 
 }

@@ -17,7 +17,7 @@ public class BackupController implements DialogHandlerFactory {
 
 	private static Logger log = Logger.getLogger(BackupController.class);
 
-	public BackupController(){
+	public BackupController() {
 		// Needed for Weld
 	}
 
